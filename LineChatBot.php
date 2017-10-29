@@ -83,8 +83,8 @@ function imageBuild()
 {
   $messages = [
       'type' => 'image',
-      'originalContentUrl' => 'https://www.google.co.th/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiC09L42pXXAhWJKY8KHYl2DpoQjRwIBw&url=https%3A%2F%2Fsites.google.com%2Fsite%2Fkmllaksnthxngchun%2Fkhnm-khe&psig=AOvVaw3dYy3XGn83fy58KyFcYPfn&ust=1509362285368997',
-      'previewImageUrl' => 'https://www.google.co.th/imgres?imgurl=http%3A%2F%2F4.bp.blogspot.com%2F-RXXSYK859M4%2FUJnSnwXYOjI%2FAAAAAAAAABU%2FIUjuqH3X0C4%2Fs320%2Fpayslip_20100203173630.jpg&imgrefurl=https%3A%2F%2Fsites.google.com%2Fsite%2Fkmllaksnthxngchun%2Fkhnm-khe&docid=9ddAlsfl7FOf9M&tbnid=D6vKAyWMvklfbM%3A&vet=10ahUKEwjV6vzn2pXXAhVKq48KHW6WBvkQMwgpKAUwBQ..i&w=304&h=320&bih=908&biw=950&q=%E0%B8%82%E0%B8%99%E0%B8%A1%E0%B9%80%E0%B8%84%E0%B9%89%E0%B8%81&ved=0ahUKEwjV6vzn2pXXAhVKq48KHW6WBvkQMwgpKAUwBQ&iact=mrc&uact=8'
+      'originalContentUrl' => 'https://www.google.co.th/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiC09L42pXXAhWJKY8KHYl2DpoQjRwIBw&url=https%3A%2F%2Fsites.google.com%2Fsite%2Fkmllaksnthxngchun%2Fkhnm-khe&psig=AOvVaw3dYy3XGn83fy58KyFcYPfn&ust=1509362285368997.jpg',
+      'previewImageUrl' => 'https://www.google.co.th/imgres?imgurl=http%3A%2F%2F4.bp.blogspot.com%2F-RXXSYK859M4%2FUJnSnwXYOjI%2FAAAAAAAAABU%2FIUjuqH3X0C4%2Fs320%2Fpayslip_20100203173630.jpg&imgrefurl=https%3A%2F%2Fsites.google.com%2Fsite%2Fkmllaksnthxngchun%2Fkhnm-khe&docid=9ddAlsfl7FOf9M&tbnid=D6vKAyWMvklfbM%3A&vet=10ahUKEwjV6vzn2pXXAhVKq48KHW6WBvkQMwgpKAUwBQ..i&w=304&h=320&bih=908&biw=950&q=%E0%B8%82%E0%B8%99%E0%B8%A1%E0%B9%80%E0%B8%84%E0%B9%89%E0%B8%81&ved=0ahUKEwjV6vzn2pXXAhVKq48KHW6WBvkQMwgpKAUwBQ&iact=mrc&uact=8.jpg'
   ];
   return $messages;
 }
