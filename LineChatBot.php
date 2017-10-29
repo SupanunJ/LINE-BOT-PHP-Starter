@@ -57,7 +57,7 @@ if (!is_null($events['events']))
 			{
         pushMessage($userID,textBuild('หากท่านต้องการแก้ไขข้อมูลส่วนตัวของท่าน กรุณาพิมพ์ตามรูปแบบการแก้ไขดังนี้ิ'),$access_token);
         pushMessage($userID,textBuild('แก้ไข/สิ่งที่ท่านต้องการแก้ไข/ข้อมูลที่แก้ไชแล้ว เช่น ท่านต้องการแก้ไขเบอร์โทรศัพท์ จะต้องพิมพ์ดังนี้ แก้ไข/เบอร์โทรศัพท์/0812345678 เป็นต้น'),$access_token);
-        confirmBuild($userID,$access_token);
+        //confirmBuild($userID,$access_token);
 			}
 		}
 	}
@@ -72,7 +72,7 @@ function textBuild($text)
   return [$messages];
 }
 
-function confirmBuild ($userID,$access_token)
+/*function confirmBuild ($userID,$access_token)
 {
 	$messages = [
       "type" => "template",
@@ -82,7 +82,7 @@ function confirmBuild ($userID,$access_token)
                                        array("type" => "message","label" => "Yes","text" => "yes"))
   ];
   pushMessage($userID,[$messages],$access_token);
-}
+}*/
 
 function replyMessage($replyToken,$messages,$access_token)
 {
