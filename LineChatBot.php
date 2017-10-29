@@ -52,6 +52,10 @@ if (!is_null($events['events']))
         confirmBuild($userID,$access_token);
 			}
 		}
+    if ($event['type'] == 'message' && $event['message']['type'] == 'sticker')
+    {
+      pushMessage($userID,stickerBuild(),$access_token);
+    }
 	}
 }
 function textBuild($text)
@@ -62,6 +66,17 @@ function textBuild($text)
 			];
   return $messages;
 }
+
+function stickerBuild()
+{
+  $messages = [
+      'type' => 'sticker',
+      'packageId' => '1',
+      'stickerId' => '1'
+  ];
+  return $messages;
+}
+
 function confirmBuild ($userID,$access_token)
 {
 	$messages = [
