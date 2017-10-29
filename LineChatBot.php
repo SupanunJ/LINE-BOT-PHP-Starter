@@ -50,7 +50,7 @@ if (!is_null($events['events']))
 			{
         pushMessage($userID,textBuild('หากท่านต้องการแก้ไขข้อมูลส่วนตัวของท่าน กรุณาพิมพ์ตามรูปแบบการแก้ไขดังนี้ิ'),$access_token);
         pushMessage($userID,textBuild('แก้ไข/สิ่งที่ท่านต้องการแก้ไข/ข้อมูลที่แก้ไชแล้ว เช่น ท่านต้องการแก้ไขเบอร์โทรศัพท์ จะต้องพิมพ์ดังนี้ แก้ไข/เบอร์โทรศัพท์/0812345678 เป็นต้น'),$access_token);
-        confirmBuild($userID,$access_token);
+        pushMessage($userID,confirmBuild(),$access_token);
 			}
 		}
     if ($event['type'] == 'message' && $event['message']['type'] == 'sticker')
@@ -121,16 +121,25 @@ function buttonBuild()
   return $messages;
 }
 
-function confirmBuild ($userID,$access_token)
+function confirmBuild ()
 {
 	$messages = [
-      "type" => "template",
-      "altText" => "this is a confirm template",
-      "template" => array("type" => "confirm","text" => "Are you sure?",
-                          "actions" => array("type" => "message","label" => "Yes","text" => "yes"),
-                                       array("type" => "message","label" => "Yes","text" => "yes"))
+      'type' => 'template',
+      'altText' => 'this is a confirm template',
+      'template' => [
+          'type' => 'confirm',
+          'text' => 'Are you sure?',
+          'actions' => [
+              ['type' => 'message',
+              'label' => 'eiei',
+              'text' => 'eiei'],
+              ['type' => 'message',
+              'label' => 'tamutami',
+              'text' => 'tamutami']
+          ]
+      ]
   ];
-  pushMessage($userID,$messages,$access_token);
+  return $messages;
 }
 function replyMessage($replyToken,$messages,$access_token)
 {
