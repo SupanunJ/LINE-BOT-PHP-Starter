@@ -61,6 +61,7 @@ class BOT_API extends LINEBot {
                 if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
                     $this->isText = true;
                     $this->text   = $event['message']['text'];
+                    replyMessageNew($this->replyToken,$this->text);
                 }
 
                 if ($event['type'] == 'message' && $event['message']['type'] == 'image') {
@@ -75,7 +76,6 @@ class BOT_API extends LINEBot {
         }
 
         parent::__construct($this->httpClient, [ 'channelSecret' => $channelSecret ]);
-
     }
 
     public function sendMessageNew ($to = null, $message = null) {
