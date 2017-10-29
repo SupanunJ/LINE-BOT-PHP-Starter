@@ -15,20 +15,15 @@ if (!is_null($events['events']))
 		{
 			$getText = $event['message']['text'];
 			$userID = $event['source']['userId'];
-
 			if ($getText=='สมัครสมาชิก')
 			{
 				$replyToken = $event['replyToken'];
         replyMessage($replyToken,textBuild('กรุณากรอกข้อมูลที่เป็นจริงเพื่อท่านจะได้รับบริการที่ถูกต้อง'),$access_token);
-
         pushMessage($userID,textBuild('กรุณากรอกข้อมูลดังต่อไปนี้ : สมัครสมาชิก,ชื่อ,นามสกุล,เบอร์โทร์ศัพท์ที่ติดต่อได้,บ้านเลขที่,ซอย,หมู่บ้าน,แขวง,อำเภอ,จังหวัด,รหัสไปรษณีย์,ข้อมูลอื่นๆ'),access_token);
-
         pushMessage($userID,textBuild('กรณีที่ ที่อยู่ของท่าน มีหมายเลขห้องหรือชั้นด้วย กรุณาใส่ใน ข้อมูลอื่นๆ'),$access_token);
 			}
-
 			else if (strpos($getText,"สมัครสมาชิก,")!==false)
 			{
-
 				$text = str_replace('สมัครสมาชิก','',$getText);
 				$register = explode(',',$text);
 				$iCount = count($register);
@@ -41,38 +36,33 @@ if (!is_null($events['events']))
 				$text1 = $ansText;
         pushMessage($userID,textBuild($text1),$access_token);
 			}
-
 			else if ($getText=='ดูเมนูและสั่งซื้อสินค้า'||$getText=='ดูเมนู'||$getText=='สั่งซื้อ')
 			{
 				$replyToken = $event['replyToken'];
         replyMessage($replyToken,textBuild('บริการนี้ยังไม่เปิดใช้บริการ').$access_token);
 			}
-
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
         pushMessage($userID,textBuild('ร้านขนมข้าวตังเสวยแม่ณี  สามารถติดต่อทางร้านได้ที่เบอร์  0818178962 ทางร้านขอขอบพระคุณลูกค้าทุกท่านที่ใช้บริการ'),$access_token);
 			}
-
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
         pushMessage($userID,textBuild('หากท่านต้องการแก้ไขข้อมูลส่วนตัวของท่าน กรุณาพิมพ์ตามรูปแบบการแก้ไขดังนี้ิ'),$access_token);
         pushMessage($userID,textBuild('แก้ไข/สิ่งที่ท่านต้องการแก้ไข/ข้อมูลที่แก้ไชแล้ว เช่น ท่านต้องการแก้ไขเบอร์โทรศัพท์ จะต้องพิมพ์ดังนี้ แก้ไข/เบอร์โทรศัพท์/0812345678 เป็นต้น'),$access_token);
-        //confirmBuild($userID,$access_token);
+        confirmBuild($userID,$access_token);
 			}
 		}
 	}
 }
-
 function textBuild($text)
 {
   $messages = [
 			'type' => 'text',
 			'text' => $text
 			];
-  return [$messages];
+  return $messages;
 }
-
-/*function confirmBuild ($userID,$access_token)
+function confirmBuild ($userID,$access_token)
 {
 	$messages = [
       "type" => "template",
@@ -81,14 +71,13 @@ function textBuild($text)
                           "actions" => array("type" => "message","label" => "Yes","text" => "yes"),
                                        array("type" => "message","label" => "Yes","text" => "yes"))
   ];
-  pushMessage($userID,[$messages],$access_token);
-}*/
-
+  pushMessage($userID,$messages,$access_token);
+}
 function replyMessage($replyToken,$messages,$access_token)
 {
   $data = [
 		'replyToken' => $replyToken,
-		'messages' => [$messages],
+		'messages' => [$messages]
 			];
 	exec_url($data,$access_token,'https://api.line.me/v2/bot/message/reply');
 }
@@ -104,7 +93,6 @@ function exec_url($data,$access_token,$url)
 {
 	$post = json_encode($data);
 	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
-
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
