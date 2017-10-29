@@ -43,8 +43,8 @@ if (!is_null($events['events']))
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
-        pushMessage($userID,textBuild('ร้านขนมข้าวตังเสวยแม่ณี  สามารถติดต่อทางร้านได้ที่เบอร์  0818178962 ทางร้านขอขอบพระคุณลูกค้าทุกท่านที่ใช้บริการ'),$access_token);
-        pushMessage($userID,buttonBuild(),$access_token);
+        pushMessage($userID,locationBuild(),$access_token);
+        pushMessage($userID,textBuild('สามารถติดต่อทางร้านได้ที่เบอร์ 0817349462 และ 0818178962'),$access_token);
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
@@ -94,9 +94,9 @@ function locationBuild()
   $messages = [
       'type' => 'location',
       'title' => 'Shop Location',
-      'address' => 'บ้านบัวทอง2',
-      'latitude' => '13.894987',
-      'longitude' => '100.402295'
+      'address' => 'ร้านขนมข้าวตังเสวยแม่ณี',
+      'latitude' => '13.885542',
+      'longitude' => '100.503373'
   ];
   return $messages;
 }
