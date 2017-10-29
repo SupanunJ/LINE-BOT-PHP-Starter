@@ -54,6 +54,7 @@ if (!is_null($events['events']))
 		}
     if ($event['type'] == 'message' && $event['message']['type'] == 'sticker')
     {
+      $userID = $event['source']['userId'];
       pushMessage($userID,stickerBuild(),$access_token);
     }
 	}
