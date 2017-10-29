@@ -88,7 +88,7 @@ function replyMessage($replyToken,$messages,$access_token)
 {
   $data = [
 		'replyToken' => $replyToken,
-		'messages' => [$messages]
+		'messages' => $messages
 			];
 	exec_url($data,$access_token,'https://api.line.me/v2/bot/message/reply');
 }
@@ -96,7 +96,7 @@ function pushMessage($userID,$messages,$access_token)
 {
   $data = [
 		'to' => $userID,
-		'messages' => [$messages],
+		'messages' => $messages
 		];
 	exec_url($data,$access_token,'https://api.line.me/v2/bot/message/push');
 }
