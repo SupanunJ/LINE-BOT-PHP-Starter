@@ -112,9 +112,9 @@ function buttonBuild()
           'title' => 'Menu',
           'text' => 'Please select',
           'actions' => [
-                'type' => 'message',
+                ['type' => 'message',
                 'label' => 'eiei',
-                'text' => 'eiei'
+                'text' => 'eiei']
             ]
         ]
   ];
