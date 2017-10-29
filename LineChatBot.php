@@ -44,6 +44,7 @@ if (!is_null($events['events']))
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
         pushMessage($userID,textBuild('ร้านขนมข้าวตังเสวยแม่ณี  สามารถติดต่อทางร้านได้ที่เบอร์  0818178962 ทางร้านขอขอบพระคุณลูกค้าทุกท่านที่ใช้บริการ'),$access_token);
+        pushMessage($userID,imageBuild(),$access_token);
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
@@ -74,6 +75,16 @@ function stickerBuild()
       'type' => 'sticker',
       'packageId' => '1',
       'stickerId' => '1'
+  ];
+  return $messages;
+}
+
+function imageBuild()
+{
+  $messages = [
+      'type' => 'image',
+      'originalContentUrl' => 'https://example.com/original.jpg',
+      'previewImageUrl' => 'https://example.com/preview.jpg'
   ];
   return $messages;
 }
