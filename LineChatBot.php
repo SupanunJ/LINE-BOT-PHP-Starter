@@ -61,11 +61,18 @@ if (!is_null($events['events']))
 
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
-				$text1 = 'หากท่านต้องการแก้ไขข้อมูลส่วนตัวของท่าน กรุณาพิมพ์ตามรูปแบบการแก้ไขดังนี้';
+
+				pushButton ($userID,$access_token);
+				replyButton ($replyToken,$access_token);
+				/*$text1 = 'หากท่านต้องการแก้ไขข้อมูลส่วนตัวของท่าน กรุณาพิมพ์ตามรูปแบบการแก้ไขดังนี้';
 				pushpattern($userID,$text1,$access_token);
 
 				$text2 = 'แก้ไข/สิ่งที่ท่านต้องการแก้ไข/ข้อมูลที่แก้ไชแล้ว เช่น ท่านต้องการแก้ไขเบอร์โทรศัพท์ จะต้องพิมพ์ดังนี้ แก้ไข/เบอร์โทรศัพท์/0812345678 เป็นต้น';
-				pushpattern($userID,$text2,$access_token);
+				pushpattern($userID,$text2,$access_token);*/
+
+
+				/*$replyToken = $event['replyToken'];
+				replyButton($replyToken,$access_token);*/
 			}
 		}
 	}
@@ -95,6 +102,52 @@ function pushpattern ($userID,$text,$access_token)
 		];
 	pushMessage($data,$access_token);
 }
+
+function pushButton ($userID,$access_token)
+{
+	$actions = [
+		'type' => 'message','label' => 'Yes','text' => 'yes'
+		];
+	$template = [
+		'type' => 'confirm',
+		'text' => 'Are you sure?',
+		'actions' => [$actions]
+		];
+	$messages = [
+		'type' => 'template',
+		'altText' =>'this is a confirm template',
+		'template' => [$template]
+		];
+	$data = [
+		'to' => $userID,
+		'messages' => [$messages]
+		];
+	pushMessage ($data,$access_token);
+}
+
+function replyButton ($replyToken,$access_token)
+{
+	$actions = [
+		['type' => 'message','label' => 'Yes','text' => 'yes'],
+		['type' => 'message','label' => 'No','text' => 'no']
+		];
+	$template = [
+		'type' => 'confirm',
+		'text' => 'Are you sure?',
+		'actions' => [$actions]
+		];
+	$messages = [
+		'type' => 'template',
+		'altText' =>'this is a confirm template',
+		'template' => [$template]
+		];
+	$data = [
+		'replyToken' => $replyToken,
+		'messages' => [$messages]
+			];
+	replyMessage ($data,$access_token);
+}
+
 function replyMessage($data,$access_token)
 {
 	exec_url($data,$access_token,'https://api.line.me/v2/bot/message/reply');
