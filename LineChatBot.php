@@ -1,81 +1,134 @@
 <?php
-require_once '../vendor/autoload.php';
+$access_token = 's/m2qnXnrLyOpbmE+aJ71nNBy1k2ZBJQaoBZN6e26iDAVdZ+BS510Z4fX6Wa8e9q72LLyTfQ3mrRhW3Y4Llr/SJ8J57kt5STaOI7uXzgqFYTpgLqPFVRLKRjsSmPfw93P/OhsfIjqlyUJTL007RLXgdB04t89/1O/w1cDnyilFU=';
+// Get POST body content
+$content = file_get_contents('php://input');
+// Parse JSON
+$events = json_decode($content, true);
+// Validate parsed JSON data
+if (!is_null($events['events']))
+{
+	// Loop through each event
+	foreach ($events['events'] as $event)
+	{
+		// Reply only when message sent is in 'text' format
+		if ($event['type'] == 'message' && $event['message']['type'] == 'text')
+		{
+			$getText = $event['message']['text'];
+			$userID = $event['source']['userId'];
 
-use \LINE\LINEBot;
-use \LINE\LINEBot\HTTPClient;
-use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
-use \LINE\LINEBot\MessageBuilder;
-use \LINE\LINEBot\MessageBuilder\TextMessageBuilder;
+			if ($getText=='สมัครสมาชิก')
+			{
+				$replyToken = $event['replyToken'];
+        replyMessage($replyToken,textBuild('กรุณากรอกข้อมูลที่เป็นจริงเพื่อท่านจะได้รับบริการที่ถูกต้อง'),$access_token);
 
-$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($_ENV["s/m2qnXnrLyOpbmE+aJ71nNBy1k2ZBJQaoBZN6e26iDAVdZ+BS510Z4fX6Wa8e9q72LLyTfQ3mrRhW3Y4Llr/SJ8J57kt5STaOI7uXzgqFYTpgLqPFVRLKRjsSmPfw93P/OhsfIjqlyUJTL007RLXgdB04t89/1O/w1cDnyilFU="]);
-$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $_ENV["8821ce3c7a32c9fc1a25b004a0af98ec"]]);
-/*$signature = $_SERVER['HTTP_' . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-try {
-	$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
-} catch(\LINE\LINEBot\Exception\InvalidSignatureException $e) {
-	error_log('parseEventRequest failed. InvalidSignatureException => '.var_export($e, true));
-} catch(\LINE\LINEBot\Exception\UnknownEventTypeException $e) {
-	error_log('parseEventRequest failed. UnknownEventTypeException => '.var_export($e, true));
-} catch(\LINE\LINEBot\Exception\UnknownMessageTypeException $e) {
-	error_log('parseEventRequest failed. UnknownMessageTypeException => '.var_export($e, true));
-} catch(\LINE\LINEBot\Exception\InvalidEventRequestException $e) {
-	error_log('parseEventRequest failed. InvalidEventRequestException => '.var_export($e, true));
-}*/
-foreach ($events as $event) {
-	// Message Event = TextMessage
-	if (($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage)) {
-		$messageText=strtolower(trim($event->getText()));
-		switch ($messageText) {
-		case "text" :
-			$outputText = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("text message");
-			break;
-		case "location" :
-			$outputText = new \LINE\LINEBot\MessageBuilder\LocationMessageBuilder("Eiffel Tower", "Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France", 48.858328, 2.294750);
-			break;
-		case "button" :
-			$actions = array (
-				// general message action
-				New \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("button 1", "text 1"),
-				// URL type action
-				New \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("Google", "http://www.google.com"),
-				// The following two are interactive actions
-				New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("next page", "page=3"),
-				New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("Previous", "page=1")
-			);
-			$img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
-			$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("button text", "description", $img_url, $actions);
-			$outputText = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("this message to use the phone to look to the Oh", $button);
-			break;
-		case "carousel" :
-			$columns = array();
-			$img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
-			for($i=0;$i<5;$i++) {
-				$actions = array(
-					new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("Add to Card","action=carousel&button=".$i),
-					new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("View","http://www.google.com")
-				);
-				$column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder("Title", "description", $img_url , $actions);
-				$columns[] = $column;
+        pushMessage($userID,textBuild('กรุณากรอกข้อมูลดังต่อไปนี้ : สมัครสมาชิก,ชื่อ,นามสกุล,เบอร์โทร์ศัพท์ที่ติดต่อได้,บ้านเลขที่,ซอย,หมู่บ้าน,แขวง,อำเภอ,จังหวัด,รหัสไปรษณีย์,ข้อมูลอื่นๆ'),access_token);
+
+        pushMessage($userID,textBuild('กรณีที่ ที่อยู่ของท่าน มีหมายเลขห้องหรือชั้นด้วย กรุณาใส่ใน ข้อมูลอื่นๆ'),$access_token);
 			}
-			$carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
-			$outputText = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("Carousel Demo", $carousel);
-			break;
-		case "image" :
-			$img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
-			$outputText = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
-			break;
-		case "confirm" :
-			$actions = array (
-				New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("yes", "ans=y"),
-				New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("no", "ans=N")
-			);
-			$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder("problem", $actions);
-			$outputText = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("this message to use the phone to look to the Oh", $button);
-			break;
-		default :
-			$outputText = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("demo command: text, location, button, confirm to test message template");
-			break;
+
+			else if (strpos($getText,"สมัครสมาชิก,")!==false)
+			{
+
+				$text = str_replace('สมัครสมาชิก','',$getText);
+				$register = explode(',',$text);
+				$iCount = count($register);
+				$inform = ['ชื่อ','นามสกุล','เบอร์โทรศัพท์ที่สามารถติดต่อได้','บ้านเลขที่','ซอย','หมู่บ้าน','แขวง','อำเภอ','จังหวัด','รหัสไปรษณีย์','ข้อมูลอื่นๆ'];
+				$ansText = '';
+				for ($i = 0; $i<$iCount-1; $i++)
+				{
+					$ansText = $ansText.'   '.$inform[$i] . ' : ' . $register[$i+1];
+				}
+				$text1 = $ansText;
+        pushMessage($userID,textBuild($text1),$access_token);
+			}
+
+			else if ($getText=='ดูเมนูและสั่งซื้อสินค้า'||$getText=='ดูเมนู'||$getText=='สั่งซื้อ')
+			{
+				$replyToken = $event['replyToken'];
+        replyMessage($replyToken,textBuild('บริการนี้ยังไม่เปิดใช้บริการ').$access_token);
+			}
+
+			else if ($getText=='ดูข้อมูลร้านค้า')
+			{
+        pushMessage($userID,textBuild('ร้านขนมข้าวตังเสวยแม่ณี  สามารถติดต่อทางร้านได้ที่เบอร์  0818178962 ทางร้านขอขอบพระคุณลูกค้าทุกท่านที่ใช้บริการ'),$access_token);
+			}
+
+			else if ($getText=='ดูข้อมูลส่วนตัว')
+			{
+        pushMessage($userID,textBuild('งุงิงุงิ'),$access_token);
+				/*$text1 = 'หากท่านต้องการแก้ไขข้อมูลส่วนตัวของท่าน กรุณาพิมพ์ตามรูปแบบการแก้ไขดังนี้';
+				pushpattern($userID,$text1,$access_token);
+
+				$text2 = 'แก้ไข/สิ่งที่ท่านต้องการแก้ไข/ข้อมูลที่แก้ไชแล้ว เช่น ท่านต้องการแก้ไขเบอร์โทรศัพท์ จะต้องพิมพ์ดังนี้ แก้ไข/เบอร์โทรศัพท์/0812345678 เป็นต้น';
+				pushpattern($userID,$text2,$access_token);*/
+
+
+				/*$replyToken = $event['replyToken'];
+				replyButton($replyToken,$access_token);*/
+			}
 		}
-		$response = $bot->replyMessage($event->getReplyToken(), $outputText);
 	}
+}
+
+function textBuild($text)
+{
+  $messages = [
+			'type' => 'text',
+			'text' => $text
+			];
+  return $messages;
+}
+
+/*function confirmBuild ($userID,$access_token)
+{
+	$actions = [
+		'type' => 'message','label' => 'Yes','text' => 'yes'
+		];
+	$template = [
+		'type' => 'confirm',
+		'text' => 'Are you sure?',
+		'actions' => [$actions]
+		];
+	$messages = [
+		'type' => 'template',
+		'altText' =>'this is a confirm template',
+		'template' => [$template]
+		];
+	$data = [
+		'to' => $userID,
+		'messages' => [$messages]
+		];
+	pushMessage ($data,$access_token);
+}*/
+
+function replyMessage($replyToken,$messages,$access_token)
+{
+  $data = [
+		'replyToken' => $replyToken,
+		'messages' => [$messages]
+			];
+	exec_url($data,$access_token,'https://api.line.me/v2/bot/message/reply');
+}
+function pushMessage($userID,$messages,$access_token)
+{
+  $data = [
+		'to' => $userID,
+		'messages' => [$messages],
+		];
+	exec_url($data,$access_token,'https://api.line.me/v2/bot/message/push');
+}
+function exec_url($data,$access_token,$url)
+{
+	$post = json_encode($data);
+	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$result = curl_exec($ch);
+	curl_close($ch);
+	echo $result . "\r\n";
 }
