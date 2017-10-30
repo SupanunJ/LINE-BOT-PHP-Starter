@@ -87,8 +87,8 @@ function imageBuild()
 {
   $messages = [
       'type' => 'image',
-      'originalContentUrl' => 'https://goo.gl/rnXwNe',
-      'previewImageUrl' => 'https://goo.gl/JKiHin'
+      'originalContentUrl' => 'https://www.picz.in.th/image/dSTP3Q',
+      'previewImageUrl' => 'https://www.picz.in.th/image/dSTP3Q'
   ];
   return $messages;
 }
