@@ -15,10 +15,10 @@ if (!is_null($events['events']))
 		{
 			$getText = $event['message']['text'];
 			$userID = $event['source']['userId'];
-      $replyToken = $event['replyToken'];
 
 			if ($getText=='สมัครสมาชิก')
 			{
+				$replyToken = $event['replyToken'];
         replyMessage($replyToken,textBuild('กรุณากรอกข้อมูลที่เป็นจริงเพื่อคุณจะได้รับบริการที่ถูกต้อง'),$access_token);
         pushMessage($userID,textBuild('กรุณากรอกข้อมูลดังต่อไปนี้ : สมัครสมาชิก,ชื่อ,นามสกุล,เบอร์โทร์ศัพท์ที่ติดต่อได้,บ้านเลขที่,ซอย,หมู่บ้าน,แขวง,อำเภอ,จังหวัด,รหัสไปรษณีย์,ข้อมูลอื่นๆ'),$access_token);
         pushMessage($userID,textBuild('*กรณีที่ ที่อยู่ของคุณ มีหมายเลขห้องหรือชั้นด้วย กรุณาใส่ใน ข้อมูลอื่นๆ'),$access_token);
@@ -42,6 +42,7 @@ if (!is_null($events['events']))
 			}
 			else if ($getText=='ดูเมนูและสั่งซื้อสินค้า'||$getText=='ดูเมนู'||$getText=='สั่งซื้อ')
 			{
+				$replyToken = $event['replyToken'];
         replyMessage($replyToken,textBuild('บริการนี้ยังไม่เปิดใช้บริการ').$access_token);
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
