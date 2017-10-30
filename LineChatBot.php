@@ -67,7 +67,7 @@ if (!is_null($events['events']))
         pushMessage($userID,textBuild('แก้ไข,สิ่งที่คุณต้องการแก้ไข,ข้อมูลที่แก้ไขแล้ว เช่น คุณต้องการแก้ไขเบอร์โทรศัพท์ จะต้องพิมพ์ดังนี้ แก้ไข,เบอร์์,0812345678 เป็นต้น'),$access_token);
 				pushMessage($userID,textBuild('ข้อมูลที่ท่านสามารถแก้ไขได้มีดังนี้ ชื่อ,นามสกุล,เบอร์,บ้านเลขที่,ซอย,หมู่บ้าน,แขวง,อำเภอ,จังหวัด,รหัสไปรษณีย์,ข้อมูลอื่นๆ'),$access_token);
 			}
-			else if (strpos($getText,('แก้ไข,ชื่อ')!==false)
+			else if (strpos($getText,('แก้ไข,ชื่อ'||'แก้ไข,นามสกุล'))!==false)
 			{
 				pushMessage($userID,textBuild('ระบบได้แก้ไขข้อมูลของคุณเรียบร้อยแล้ว'),$access_token);
 			}
