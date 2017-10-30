@@ -46,9 +46,14 @@ if (!is_null($events['events']))
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
-        pushMessage($userID,locationBuild(),$access_token);
-        pushMessage($userID,textBuild('สามารถติดต่อทางร้านได้ที่เบอร์ 0817349462 และ 0818178962'),$access_token);
-				pushMessage($userID,imageBuild(),$access_token);
+				$imageOrigi ='https://scontent-kut2-1.xx.fbcdn.net/v/t1.0-9/22814405_1701979389873235_1671810247852454191_n.jpg?oh=53a9387cb9c73b3ccf62a3534d62e6b0&oe=5A782E36';
+				$imagePreview ='https://scontent-kut2-1.xx.fbcdn.net/v/t1.0-9/22814405_1701979389873235_1671810247852454191_n.jpg?oh=53a9387cb9c73b3ccf62a3534d62e6b0&oe=5A782E36';
+				pushMessage($userID,imageBuild($imageOrigi,$imagePreview),$access_token);
+				pushMessage($userID,textBuild('ขนมข้าวตังเสวยเป็นขนมโบราณหากินได้อยาก มีรสชาติแสนอร่อย ด้วยสูตรลับของท่านร้านทำมให้ขนมมีความกรอบ หอมหวาน กลมกล่อม นึกถึงขนมข้าวตังเสวยต้องนึกถึงร้านเมณีเท่านั้น!'),$access_token);
+				pushMessage($userID,textBuild('ท่านสามารถติดต่อทางร้านได้โดยช่องทางดังนี้'),$access_token);
+				pushMessage($userID,locationBuild(),$access_token);
+        pushMessage($userID,textBuild('่เบอรโทรศัพท์ 0817349462 และ 0818178962'),$access_token);
+
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
@@ -83,12 +88,12 @@ function stickerBuild()
   return $messages;
 }
 
-function imageBuild()
+function imageBuild($original,$preview)
 {
   $messages = [
       'type' => 'image',
-      'originalContentUrl' => 'https://scontent-kut2-1.xx.fbcdn.net/v/t1.0-9/22814405_1701979389873235_1671810247852454191_n.jpg?oh=53a9387cb9c73b3ccf62a3534d62e6b0&oe=5A782E36',
-      'previewImageUrl' => 'https://scontent-kut2-1.xx.fbcdn.net/v/t1.0-9/22814405_1701979389873235_1671810247852454191_n.jpg?oh=53a9387cb9c73b3ccf62a3534d62e6b0&oe=5A782E36'
+      'originalContentUrl' => ,
+      'previewImageUrl' =>
   ];
   return $messages;
 }
