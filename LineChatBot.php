@@ -15,12 +15,14 @@ if (!is_null($events['events']))
 		{
 			$getText = $event['message']['text'];
 			$userID = $event['source']['userId'];
+      $replyToken = $event['replyToken'];
+
 			if ($getText=='สมัครสมาชิก')
 			{
-				$replyToken = $event['replyToken'];
-        replyMessage($replyToken,textBuild('กรุณากรอกข้อมูลที่เป็นจริงเพื่อท่านจะได้รับบริการที่ถูกต้อง'),$access_token);
+        replyMessage($replyToken,textBuild('กรุณากรอกข้อมูลที่เป็นจริงเพื่อคุณจะได้รับบริการที่ถูกต้อง'),$access_token);
         pushMessage($userID,textBuild('กรุณากรอกข้อมูลดังต่อไปนี้ : สมัครสมาชิก,ชื่อ,นามสกุล,เบอร์โทร์ศัพท์ที่ติดต่อได้,บ้านเลขที่,ซอย,หมู่บ้าน,แขวง,อำเภอ,จังหวัด,รหัสไปรษณีย์,ข้อมูลอื่นๆ'),$access_token);
-        pushMessage($userID,textBuild('กรณีที่ ที่อยู่ของท่าน มีหมายเลขห้องหรือชั้นด้วย กรุณาใส่ใน ข้อมูลอื่นๆ'),$access_token);
+        pushMessage($userID,textBuild('*กรณีที่ ที่อยู่ของคุณ มีหมายเลขห้องหรือชั้นด้วย กรุณาใส่ใน ข้อมูลอื่นๆ'),$access_token);
+        pushMessage($userID,textBuild('**กรณีที่ ข้อมูลใดไม่มีให้คุณใส่ ไม่มี หรือ - '),$access_token);
 			}
 			else if (strpos($getText,"สมัครสมาชิก,")!==false)
 			{
@@ -35,10 +37,11 @@ if (!is_null($events['events']))
 				}
 				$text1 = $ansText;
         pushMessage($userID,textBuild($text1),$access_token);
+
+        pushMessage($userID,textBuild('คุณได้ทำการสมัครสมาชิกเรียบร้อยแล้ว คุณสามารถใช้งานบริการต่างๆได้ทันที'),$access_token);
 			}
 			else if ($getText=='ดูเมนูและสั่งซื้อสินค้า'||$getText=='ดูเมนู'||$getText=='สั่งซื้อ')
 			{
-				$replyToken = $event['replyToken'];
         replyMessage($replyToken,textBuild('บริการนี้ยังไม่เปิดใช้บริการ').$access_token);
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
@@ -48,8 +51,8 @@ if (!is_null($events['events']))
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
-        pushMessage($userID,textBuild('หากท่านต้องการแก้ไขข้อมูลส่วนตัวของท่าน กรุณาพิมพ์ตามรูปแบบการแก้ไขดังนี้ิ'),$access_token);
-        pushMessage($userID,textBuild('แก้ไข/สิ่งที่ท่านต้องการแก้ไข/ข้อมูลที่แก้ไชแล้ว เช่น ท่านต้องการแก้ไขเบอร์โทรศัพท์ จะต้องพิมพ์ดังนี้ แก้ไข/เบอร์โทรศัพท์/0812345678 เป็นต้น'),$access_token);
+        pushMessage($userID,textBuild('หากคุณต้องการแก้ไขข้อมูลส่วนตัวของคุณ กรุณาพิมพ์ตามรูปแบบการแก้ไขดังนี้'),$access_token);
+        pushMessage($userID,textBuild('แก้ไข/สิ่งที่คุณต้องการแก้ไข/ข้อมูลที่แก้ไชแล้ว เช่น คุณต้องการแก้ไขเบอร์โทรศัพท์ จะต้องพิมพ์ดังนี้ แก้ไข/เบอร์โทรศัพท์/0812345678 เป็นต้น'),$access_token);
         pushMessage($userID,confirmBuild(),$access_token);
 			}
 		}
