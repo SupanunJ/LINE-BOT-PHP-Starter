@@ -87,8 +87,8 @@ function imageBuild()
 {
   $messages = [
       'type' => 'image',
-      'originalContentUrl' => 'https://www.picz.in.th/image/dSTFd8',
-      'previewImageUrl' => 'https://www.picz.in.th/image/dSTFd8'
+      'originalContentUrl' => 'https://scontent-kut2-1.xx.fbcdn.net/v/t1.0-9/22814405_1701979389873235_1671810247852454191_n.jpg?oh=53a9387cb9c73b3ccf62a3534d62e6b0&oe=5A782E36',
+      'previewImageUrl' => 'https://scontent-kut2-1.xx.fbcdn.net/v/t1.0-9/22814405_1701979389873235_1671810247852454191_n.jpg?oh=53a9387cb9c73b3ccf62a3534d62e6b0&oe=5A782E36'
   ];
   return $messages;
 }
