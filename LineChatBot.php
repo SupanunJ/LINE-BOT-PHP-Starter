@@ -87,8 +87,8 @@ function imageBuild()
 {
   $messages = [
       'type' => 'image',
-      'originalContentUrl' => 'https://atmedia.imgix.net/a4113f7cc8c2fc3cc96eb640f4534c625dde976e?auto=compress&w=240&h=240&fit=crop',
-      'previewImageUrl' => 'https://atmedia.imgix.net/a4113f7cc8c2fc3cc96eb640f4534c625dde976e?auto=compress&w=240&h=240&fit=crop'
+      'originalContentUrl' => 'https://www.picz.in.th/image/dSTFd8',
+      'previewImageUrl' => 'https://www.picz.in.th/image/dSTFd8'
   ];
   return $messages;
 }
