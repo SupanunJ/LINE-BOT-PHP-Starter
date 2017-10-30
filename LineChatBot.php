@@ -52,7 +52,7 @@ if (!is_null($events['events']))
 				pushMessage($userID,textBuild('ขนมข้าวตังเสวยเป็นขนมโบราณหากินได้อยาก มีรสชาติแสนอร่อย ด้วยสูตรลับของท่านร้านทำมให้ขนมมีความกรอบ หอมหวาน กลมกล่อม นึกถึงขนมข้าวตังเสวยต้องนึกถึงร้านเมณีเท่านั้น!'),$access_token);
 				pushMessage($userID,textBuild('ท่านสามารถติดต่อทางร้านได้โดยช่องทางดังนี้'),$access_token);
 				pushMessage($userID,locationBuild(),$access_token);
-        pushMessage($userID,textBuild('่เบอรโทรศัพท์ 0817349462 และ 0818178962'),$access_token);
+        pushMessage($userID,textBuild('เบอรโทรศัพท์ 0817349462 และ 0818178962'),$access_token);
 
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
@@ -92,8 +92,8 @@ function imageBuild($original,$preview)
 {
   $messages = [
       'type' => 'image',
-      'originalContentUrl' => ,
-      'previewImageUrl' =>
+      'originalContentUrl' => $original,
+      'previewImageUrl' => $preview
   ];
   return $messages;
 }
