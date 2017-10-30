@@ -88,7 +88,7 @@ function imageBuild()
   $messages = [
       'type' => 'image',
       'originalContentUrl' => 'https://goo.gl/rnXwNe',
-      'previewImageUrl' => 'https://goo.gl/rnXwNe'
+      'previewImageUrl' => 'https://goo.gl/JKiHin'
   ];
   return $messages;
 }
