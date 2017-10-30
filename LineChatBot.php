@@ -48,6 +48,7 @@ if (!is_null($events['events']))
 			{
         pushMessage($userID,locationBuild(),$access_token);
         pushMessage($userID,textBuild('สามารถติดต่อทางร้านได้ที่เบอร์ 0817349462 และ 0818178962'),$access_token);
+				pushMessage($userID,imageBuild(),$access_token);
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
@@ -86,8 +87,8 @@ function imageBuild()
 {
   $messages = [
       'type' => 'image',
-      'originalContentUrl' => 'https://example.com/original.jpg',
-      'previewImageUrl' => 'https://example.com/preview.jpg'
+      'originalContentUrl' => 'https://goo.gl/rnXwNe',
+      'previewImageUrl' => 'https://goo.gl/rnXwNe'
   ];
   return $messages;
 }
