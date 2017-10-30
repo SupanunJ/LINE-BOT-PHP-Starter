@@ -58,9 +58,18 @@ if (!is_null($events['events']))
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
-        pushMessage($userID,textBuild('หากคุณต้องการแก้ไขข้อมูลส่วนตัวของคุณ กรุณาพิมพ์ตามรูปแบบการแก้ไขดังนี้'),$access_token);
-        pushMessage($userID,textBuild('แก้ไข/สิ่งที่คุณต้องการแก้ไข/ข้อมูลที่แก้ไชแล้ว เช่น คุณต้องการแก้ไขเบอร์โทรศัพท์ จะต้องพิมพ์ดังนี้ แก้ไข/เบอร์โทรศัพท์/0812345678 เป็นต้น'),$access_token);
-        pushMessage($userID,confirmBuild(),$access_token);
+				pushMessage($userID,textBuild('ข้อมูลของคุณคือ'),$access_token);
+				pushMessage($userID,confirmBuild('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่','ต้องการ','ฉันต้องการแก้ไขข้อมูล','ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล'),$access_token);
+			}
+			else if ($getText=='ฉันต้องการแก้ไขข้อมูล')
+			{
+				pushMessage($userID,textBuild('หากคุณต้องการแก้ไขข้อมูลส่วนตัวของคุณ กรุณาพิมพ์ตามรูปแบบการแก้ไขดังนี้'),$access_token);
+        pushMessage($userID,textBuild('แก้ไข,สิ่งที่คุณต้องการแก้ไข,ข้อมูลที่แก้ไขแล้ว เช่น คุณต้องการแก้ไขเบอร์โทรศัพท์ จะต้องพิมพ์ดังนี้ แก้ไข,เบอร์โทรศัพท์,0812345678 เป็นต้น'),$access_token);
+				pushMessage($userID,textBuild('ข้อมูลที่ท่านสามารถแก้ไขได้มีดังนี้ สมัครสมาชิก,ชื่อ,นามสกุล,เบอร์โทร์ศัพท์ที่ติดต่อได้,บ้านเลขที่,ซอย,หมู่บ้าน,แขวง,อำเภอ,จังหวัด,รหัสไปรษณีย์,ข้อมูลอื่นๆ'),$access_token);
+			}
+			else if (strpos($getText,'แก้ไข,')!==false)
+			{
+				pushMessage($userID,textBuild('ระบบได้แก้ไขข้อมูลของคุณเรียบร้อยแล้ว'),$access_token);
 			}
 		}
     if ($event['type'] == 'message' && $event['message']['type'] == 'sticker')
@@ -131,21 +140,21 @@ function buttonBuild()
   return $messages;
 }
 
-function confirmBuild ()
+function confirmBuild ($textQ,$textChoices1,$textAns1,$textChoices2,$textAns2)
 {
 	$messages = [
       'type' => 'template',
       'altText' => 'this is a confirm template',
       'template' => [
           'type' => 'confirm',
-          'text' => 'Are you sure?',
+          'text' => $textQ,
           'actions' => [
               ['type' => 'message',
-              'label' => 'eiei',
-              'text' => 'eiei'],
+              'label' => $textChoices1,
+              'text' => $textAns1],
               ['type' => 'message',
-              'label' => 'tamutami',
-              'text' => 'tamutami']
+              'label' => $textChoices2,
+              'text' => $textAns2]
           ]
       ]
   ];
