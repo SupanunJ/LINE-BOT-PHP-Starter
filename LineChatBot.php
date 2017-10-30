@@ -43,7 +43,7 @@ if (!is_null($events['events']))
 			else if ($getText=='ดูเมนูและสั่งซื้อสินค้า'||$getText=='ดูเมนู'||$getText=='สั่งซื้อ')
 			{
 				$replyToken = $event['replyToken'];
-        replyMessage($replyToken,textBuild('บริการนี้ยังไม่เปิดใช้บริการ').$access_token);
+        replyMessage($replyToken,textBuild('บริการนี้ยังไม่เปิดใช้บริการ'),$access_token);
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
