@@ -28,7 +28,7 @@ if (!is_null($events['events']))
 			if($getText=='qqq')
 			{
 				$result = $connention->query("SELECT * FROM Customer");
-				if($result=null)
+				if($result==null)
 				{
 					pushMessage($userID,textBuild('yes'),$access_token);
 				}
