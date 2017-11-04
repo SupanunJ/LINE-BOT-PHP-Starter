@@ -28,8 +28,10 @@ if (!is_null($events['events']))
 			if($getText=='qqq')
 			{
 				$result = $connention->query("SELECT line_id FROM Customer");
-				$text = $result->rowCount();
-				pushMessage($userID,textBuild($text),$access_token);
+				if($result!=null)
+				{
+					pushMessage($userID,textBuild('yes'),$access_token);
+				}
 			}
 
 			if ($getText=='สมัครสมาชิก')
