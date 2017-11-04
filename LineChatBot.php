@@ -27,7 +27,8 @@ if (!is_null($events['events']))
 
 			if($getText=='qqq')
 			{
-				$text = $connention->query("SELECT line_id FROM Customer WHERE line_id = 'eiei eiei eiei'");
+				$result = $connention->query("SELECT line_id FROM Customer");
+				$text = $result->rowCount();
 				pushMessage($userID,textBuild($text),$access_token);
 			}
 
