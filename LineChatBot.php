@@ -27,11 +27,10 @@ if (!is_null($events['events']))
 
 			if($getText=='qqq')
 			{
-				$result = $connention->query("SELECT * FROM customer");
-				$num = $result->rowCount();
+				$result = $connention->query("SELECT line_id FROM customer WHERE line_id = 'Supanun'");
 				if($result==null)
 				{
-					pushMessage($userID,textBuild($num),$access_token);
+					pushMessage($userID,textBuild($result),$access_token);
 				}
 			}
 
