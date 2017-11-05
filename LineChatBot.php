@@ -27,7 +27,7 @@ if (!is_null($events['events']))
 
 			if($getText=='ยังไง')
 			{
-				$result = $connention->query("SELECT line_id FROM customer WHERE line_id = 'Supanun'");
+				$result = $connention->query("SELECT line_id FROM customer");
 				$text = ' '+$result;
 				if($result!=null)
 				{
