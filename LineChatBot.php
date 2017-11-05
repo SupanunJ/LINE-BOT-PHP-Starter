@@ -25,13 +25,13 @@ if (!is_null($events['events']))
 			$getText = $event['message']['text'];
 			$userID = $event['source']['userId'];
 
-			if($getText=='qqq')
+			if($getText=='ยังไง')
 			{
 				$result = $connention->query("SELECT * FROM customer");
-				if($result==null)
+				if($result!=null)
 				{
 					pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
-					pushMessage($userID,textBuild($result),$access_token);
+					pushMessage($userID,textBuild($result->rowCount()),$access_token);
 				}
 			}
 
