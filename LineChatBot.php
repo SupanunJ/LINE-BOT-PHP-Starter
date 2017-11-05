@@ -27,7 +27,7 @@ if (!is_null($events['events']))
 
 			if($getText=='qqq')
 			{
-				$result = $connention->query("SELECT line_id FROM customer WHERE line_id = 'Supanun'");
+				$result = $connention->query("SELECT * FROM customer");
 				if($result==null)
 				{
 					pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
