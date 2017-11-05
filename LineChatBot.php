@@ -28,11 +28,12 @@ if (!is_null($events['events']))
 			if($getText=='ยังไง')
 			{
 				$result = $connention->query("SELECT line_id FROM customer WHERE line_id = 'Supanun'");
+				$text = ' '+$result;
 				if($result!=null)
 				{
 					pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
 					pushMessage($userID,textBuild($result->rowCount()),$access_token);
-					pushMessage($userID,textBuild($result),$access_token);
+					pushMessage($userID,textBuild($text),$access_token);
 				}
 			}
 
