@@ -33,7 +33,7 @@ if (!is_null($events['events']))
 				{
 					pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
 					pushMessage($userID,textBuild($result->rowCount()),$access_token);
-					pushMessage($userID,textBuild($textquery,$access_token);
+					pushMessage($userID,textBuild($textquery),$access_token);
 				}
 			}
 
