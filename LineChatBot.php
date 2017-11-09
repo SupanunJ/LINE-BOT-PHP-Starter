@@ -27,15 +27,12 @@ if (!is_null($events['events']))
 
 			if($getText=='ยังไง')
 			{
-				$result = $connention->prepare("SELECT * FROM wowo");
+				$result = $connention->prepare("SELECT * FROM customer");
 				$text = $result->execute();
 				while($rs = $result->fetch())
 				{
 					pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
-					pushMessage($userID,textBuild($rs['a']),$access_token);
-					pushMessage($userID,textBuild($rs['b']),$access_token);
-					pushMessage($userID,textBuild($rs['c']),$access_token);
-					pushMessage($userID,textBuild($rs['d']),$access_token);
+					pushMessage($userID,textBuild($rs['line_id']),$access_token);
 				}
 				//$textquery = sprintf("%s",$result);
 				/*if($result!=null)
