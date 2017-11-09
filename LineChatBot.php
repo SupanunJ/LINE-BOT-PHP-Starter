@@ -33,6 +33,7 @@ if (!is_null($events['events']))
 				{
 					pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
 					pushMessage($userID,textBuild($rs['line_id']),$access_token);
+					pushMessage($userID,textBuild($rs['u_name']),$access_token);
 				}
 				//$textquery = sprintf("%s",$result);
 				/*if($result!=null)
