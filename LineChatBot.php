@@ -27,7 +27,7 @@ if (!is_null($events['events']))
 
 			if($getText=='ยังไง')
 			{
-				$result = $connention->query("SELECT line_id FROM customer");
+				$result = $connention->prepare("SELECT line_id FROM customer");
 				$result->execute();
 				while($rs = $result->fetch())
 				{
