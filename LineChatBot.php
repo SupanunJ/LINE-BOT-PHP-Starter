@@ -27,13 +27,15 @@ if (!is_null($events['events']))
 
 			if($getText=='ยังไง')
 			{
-				$result = $connention->prepare("SELECT line_id FROM customer");
+				$result = $connention->prepare("SELECT line_id FROM customer WHERE line_id = 'Supanun'");
 				$result->execute();
-				while($rs = $result->fetch())
+				$rs = $result->fetch()
+				pushMessage($userID,textBuild($rs['line_id']),$access_token);
+				/*while($rs = $result->fetch())
 				{
 					pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
 					pushMessage($userID,textBuild($rs['line_id']),$access_token);
-				}
+				}*/
 				//$textquery = sprintf("%s",$result);
 				/*if($result!=null)
 				{
