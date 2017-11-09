@@ -27,9 +27,9 @@ if (!is_null($events['events']))
 
 			if($getText=='ยังไง')
 			{
-				/*$result = $connention->prepare("SELECT line_id FROM customer WHERE line_id = :Supanun");
-				$text = $result->exec(Array(:));
-				pushMessage($userID,textBuild(),$access_token);*/
+				$result = $connention->prepare("SELECT line_id FROM customer WHERE line_id = :Supanun");
+				$text = $result->exec(Array(':Supanun' => $_POST['line_id']));
+				pushMessage($userID,textBuild($text),$access_token);
 				/*while($rs = $result->fetch())
 				{
 					pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
