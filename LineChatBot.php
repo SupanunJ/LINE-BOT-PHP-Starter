@@ -33,8 +33,10 @@ if (!is_null($events['events']))
 				{
 					pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
 					pushMessage($userID,textBuild($rs['line_id']),$access_token);
-					pushMessage($userID,textBuild($rs['u_name']),$access_token);
 				}
+
+				pushMessage($userID,textBuild($userID),$access_token);
+
 				//$textquery = sprintf("%s",$result);
 				/*if($result!=null)
 				{
@@ -54,19 +56,37 @@ if (!is_null($events['events']))
 			}
 			else if (strpos($getText,"สมัครสมาชิก,")!==false)
 			{
-				$text = str_replace('สมัครสมาชิก','',$getText);
-				$register = explode(',',$text);
-				$iCount = count($register);
-				$inform = ['ชื่อ','นามสกุล','เบอร์โทรศัพท์ที่สามารถติดต่อได้','บ้านเลขที่','ซอย','หมู่บ้าน','แขวง','อำเภอ','จังหวัด','รหัสไปรษณีย์','ข้อมูลอื่นๆ'];
-				$ansText = '';
-				for ($i = 0; $i<$iCount-1; $i++)
+				$result = $connention->prepare("SELECT * FROM customer");
+				$text = $result->execute();
+				$user_check = false;
+				while($rs = $result->fetch())
 				{
-					$ansText = $ansText.'   '.$inform[$i] . ' : ' . $register[$i+1];
+					if($userID==$rs['line_id'])
+					{
+						$user_check = true;
+					}
 				}
-				$text1 = $ansText;
-        pushMessage($userID,textBuild($text1),$access_token);
 
-        pushMessage($userID,textBuild('คุณได้ทำการสมัครสมาชิกเรียบร้อยแล้ว คุณสามารถใช้งานบริการต่างๆได้ทันที'),$access_token);
+				if(!$user_check)
+				{
+					$text = str_replace('สมัครสมาชิก','',$getText);
+					$register = explode(',',$text);
+					$iCount = count($register);
+					$inform = ['ชื่อ','นามสกุล','เบอร์โทรศัพท์ที่สามารถติดต่อได้','บ้านเลขที่','ซอย','หมู่บ้าน','แขวง','อำเภอ','จังหวัด','รหัสไปรษณีย์','ข้อมูลอื่นๆ'];
+					$ansText = '';
+					for ($i = 0; $i<$iCount-1; $i++)
+					{
+						$ansText = $ansText.'   '.$inform[$i] . ' : ' . $register[$i+1];
+					}
+					$text1 = $ansText;
+	        pushMessage($userID,textBuild($text1),$access_token);
+
+	        pushMessage($userID,textBuild('คุณได้ทำการสมัครสมาชิกเรียบร้อยแล้ว คุณสามารถใช้งานบริการต่างๆได้ทันที'),$access_token);
+				}
+				if($user_check)
+				{
+					pushMessage($userID,textBuild('คุณไม่สามารถสมัครสมาชิกได้เนื่องจากคุณเป็นสมาชิกอยู่แล้ว'),$access_token);
+				}
 			}
 			else if ($getText=='ดูเมนูและสั่งซื้อสินค้า'||$getText=='ดูเมนู'||$getText=='สั่งซื้อ')
 			{
