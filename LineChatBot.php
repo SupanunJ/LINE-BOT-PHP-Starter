@@ -27,14 +27,20 @@ if (!is_null($events['events']))
 
 			if($getText=='ยังไง')
 			{
-				$result = $connention->query("SELECT line_id FROM customer WHERE line_id = 'Supanun'");
+				$result = $connention->query("SELECT line_id FROM customer");
+				$result->execute();
+				while($rs = $result->fetch())
+				{
+					pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
+					pushMessage($userID,textBuild($rs['line_id']),$access_token);
+				}
 				//$textquery = sprintf("%s",$result);
-				if($result!=null)
+				/*if($result!=null)
 				{
 					pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
 					pushMessage($userID,textBuild($result->rowCount()),$access_token);
 					//pushMessage($userID,textBuild($textquery),$access_token);
-				}
+				}*/
 			}
 
 			if ($getText=='สมัครสมาชิก')
