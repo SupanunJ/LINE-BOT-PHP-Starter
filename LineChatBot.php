@@ -126,10 +126,13 @@ if (!is_null($events['events']))
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
-				$result = $connention->query("SELECT * FROM customer WHERE line_id = .$userID");
-				$row = $result->fetch(PDO::FETCH_ASSOC);
-				pushMessage($userID,textBuild($row['line_id']),$access_token);
+				$result = $connention->prepare("SELECT * FROM customer WHERE line_id = :line_id");
+				$result->bindParam(':line_id',$userID,PDO::FETCH_ASSOC);
+				$result->execute();
+				$ob = $result->fetchObject();
+				pushMessage($userID,textBuild($ob->line_id),$access_token);
 
+				pushMessage($userID,textBuild('เชคๆๆ'),$access_token);
 
 				// pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
 				// pushMessage($userID,textBuild($rs['line_id']),$access_token);
