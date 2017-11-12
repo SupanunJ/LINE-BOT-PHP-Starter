@@ -126,17 +126,17 @@ if (!is_null($events['events']))
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
-				/*$result = $connention->prepare("SELECT * FROM customer WHERE line_id = $userID");
-				$result->execute(array('line_id'=>$userID));
+				$result = $connention->query("SELECT * FROM customer WHERE line_id = .$userID");
+				$row = $result->fetch(PDO::FETCH_ASSOC);
+				pushMessage($userID,textBuild($row['line_id']),$access_token);
 
-				pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
-				pushMessage($userID,textBuild($rs['line_id']),$access_token);
-				pushMessage($userID,textBuild($rs['u_name']),$access_token);*/
 
-				pushMessage($userID,textBuild('eiei'.$userID),$access_token);
-
-				pushMessage($userID,textBuild('ข้อมูลของคุณคือ'),$access_token);
-				pushMessage($userID,confirmBuild('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่','ต้องการ','ฉันต้องการแก้ไขข้อมูล','ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล'),$access_token);
+				// pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
+				// pushMessage($userID,textBuild($rs['line_id']),$access_token);
+				// pushMessage($userID,textBuild($rs['u_name']),$access_token);
+        //
+				// pushMessage($userID,textBuild('ข้อมูลของคุณคือ'),$access_token);
+				// pushMessage($userID,confirmBuild('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่','ต้องการ','ฉันต้องการแก้ไขข้อมูล','ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล'),$access_token);
 			}
 			else if ($getText=='ฉันต้องการแก้ไขข้อมูล')
 			{
