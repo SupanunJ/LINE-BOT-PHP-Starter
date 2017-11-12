@@ -72,7 +72,7 @@ if (!is_null($events['events']))
 					$text = str_replace('สมัครสมาชิก','',$getText);
 					$register = explode(',',$text);
 					$iCount = count($register);
-					$inform = ['ชื่อ','นามสกุล','เบอร์โทรศัพท์ที่สามารถติดต่อได้','บ้านเลขที่','ซอย','หมู่บ้าน','แขวง','อำเภอ','จังหวัด','รหัสไปรษณีย์','ข้อมูลอื่นๆ'];
+					$inform = ['ชื่อ','นามสกุล','เบอร์โทรศัพท์ที่สามารถติดต่อได้','บ้านเลขที่','หมู่บ้าน','ซอย','ถนน','แขวง','อำเภอ','จังหวัด','รหัสไปรษณีย์','ข้อมูลอื่นๆ'];
 					$ansText = '';
 					for ($i = 0; $i<$iCount-1; $i++)
 					{
@@ -80,8 +80,29 @@ if (!is_null($events['events']))
 					}
 					$text1 = $ansText;
 	        pushMessage($userID,textBuild($text1),$access_token);
-
 	        pushMessage($userID,textBuild('คุณได้ทำการสมัครสมาชิกเรียบร้อยแล้ว คุณสามารถใช้งานบริการต่างๆได้ทันที'),$access_token);
+
+					$params = array(
+							'user_id' => $userID,
+							'u_name' => $register[1],
+							'u_lastname' => $register[2],
+							'u_status' => 1,
+							'u_tel' => $register[3],
+							'house_no' => $register[4],
+							'village' => $register[5],
+							'lane' => $register[6],
+							'road' => $register[7],
+							'subarea' => $register[8],
+							'area' => $register[9],
+							'province' => $register[10],
+							'postal_code' => $register[11],
+							'annotation' => $register[12],
+					);
+					$statement = $connention->prepare('INSERT INTO customer (user_id,u_name,u_lastname,u_status,u_tel,house_no,village,lane,road,subarea,area,province,postal_code,annotation)
+																						VALUES (:user_id,:u_name,:u_lastname,:u_status,:u_tel,:house_no,:village,:lane,:road,:subarea,:area,:province,:postal_code,:annotation)');
+
+					$statement->execute($params);
+
 				}
 				if($user_check)
 				{
@@ -106,6 +127,15 @@ if (!is_null($events['events']))
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
+				$result = $connention->prepare("SELECT * FROM customer");
+				$text = $result->execute();
+				while($rs = $result->fetch())
+				{
+					pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
+					pushMessage($userID,textBuild($rs['line_id']),$access_token);
+					pushMessage($userID,textBuild($rs['u_name']),$access_token);
+				}
+
 				pushMessage($userID,textBuild('ข้อมูลของคุณคือ'),$access_token);
 				pushMessage($userID,confirmBuild('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่','ต้องการ','ฉันต้องการแก้ไขข้อมูล','ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล'),$access_token);
 			}
