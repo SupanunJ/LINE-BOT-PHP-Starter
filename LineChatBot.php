@@ -83,7 +83,7 @@ if (!is_null($events['events']))
 	        pushMessage($userID,textBuild('คุณได้ทำการสมัครสมาชิกเรียบร้อยแล้ว คุณสามารถใช้งานบริการต่างๆได้ทันที'),$access_token);
 
 					$params = array(
-							'user_id' => $userID,
+							':user_id' => $userID,
 							/*'u_name' => $register[1],
 							'u_lastname' => $register[2],
 							'u_status' => 1,
