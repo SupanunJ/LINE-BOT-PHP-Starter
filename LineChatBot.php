@@ -130,9 +130,8 @@ if (!is_null($events['events']))
 				$result->bindParam(':line_id',$userID,PDO::FETCH_ASSOC);
 				$result->execute();
 				$ob = $result->fetchObject();
-				// $textResult = 'ชื่อ : '.$ob->u_name.' นามสกุล : '.$ob->u_lastname;
-				pushMessage($userID,textBuild($ob->u_name),$access_token);
-				pushMessage($userID,textBuild($ob->u_lastname),$access_token);
+				$textResult = 'ชื่อ : '.$ob->u_name.'\n'.' นามสกุล : '.$ob->u_lastname;
+				pushMessage($userID,textBuild($textResult),$access_token);
 
 
 				// pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
