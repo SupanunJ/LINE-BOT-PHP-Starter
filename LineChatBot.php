@@ -84,7 +84,7 @@ if (!is_null($events['events']))
 
 					//,:u_name,:u_lastname,:u_status,:u_tel,:house_no,:village,:lane,:road,:subarea,:area,:province,:postal_code,:annotation
 					//,u_name,u_lastname,u_status,u_tel,house_no,village,lane,road,subarea,area,province,postal_code,annotation
-					$statement = $connention->prepare('INSERT INTO customer (line_id, u_name) VALUES (:line_id, :u_name)');
+					$statement = $connention->prepare('INSERT INTO customer (line_id, u_name,u_lastname,u_status,u_tel,house_no,village,lane,road,subarea,area,province,postal_code,annotation) VALUES (:line_id, :u_name, :u_lastname, :u_status, :u_tel, :house_no, :village, :lane, :road, :subarea, :area, :province, :postal_code, :annotation)');
 					/*$statement->bindParam(':line_id',$userID);
 					$statement->bindParam(':u_name','eiei');
 					$statement->bindParam(':u_lastname','$register[2]');
@@ -101,7 +101,19 @@ if (!is_null($events['events']))
 					$statement->bindParam(':annotation','$register[12]');*/
 					$statement->execute(array(
 						'line_id' => $userID,
-						'u_name' => 'eiiiiii'
+						'u_name' => $register[1],
+						'u_lastname' => $register[2],
+						'u_status' => 1,
+						'u_tel' => $register[3],
+						'house_no' => $register[4],
+						'village' => $register[5],
+						'lane' => $register[6],
+						'road' => $register[7],
+						'subarea' => $register[8],
+						'area' => $register[9],
+						'province' => $register[10],
+						'postal_code' => $register[11],
+						'annotation' => $register[12]
 					));
 
 				}
