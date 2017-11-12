@@ -100,7 +100,7 @@ if (!is_null($events['events']))
 					);*/
 					//,u_name,u_lastname,u_status,u_tel,house_no,village,lane,road,subarea,area,province,postal_code,annotation
 					//,:u_name,:u_lastname,:u_status,:u_tel,:house_no,:village,:lane,:road,:subarea,:area,:province,:postal_code,:annotation
-					$statement = $connention->prepare('INSERT INTO customer (user_id) VALUES (:user_id)');
+					$statement = $connention->prepare('INSERT INTO customer (line_id) VALUES (:line_id)');
 					$statement->bindParam(':line_id',$userID);
 					$statement->execute();
 
