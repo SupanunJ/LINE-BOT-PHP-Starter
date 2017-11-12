@@ -130,7 +130,7 @@ if (!is_null($events['events']))
 				$result->bindParam(':line_id',$userID,PDO::FETCH_ASSOC);
 				$result->execute();
 				$ob = $result->fetchObject();
-				$textResult = $ob->line_id.$ob->u_lastname;
+				$textResult = 'ชื่อ : '.$ob->u_name.\n.' นามสกุล : '.$ob->u_lastname;
 				pushMessage($userID,textBuild($textResult),$access_token);
 
 				pushMessage($userID,textBuild('เชคๆๆ'),$access_token);
