@@ -132,7 +132,6 @@ if (!is_null($events['events']))
 				$ob = $result->fetchObject();
 				// $textResult = 'ชื่อ : '.$ob->u_name.' นามสกุล : '.$ob->u_lastname;
 				pushMessage($userID,textBuild($ob->u_name),$access_token);
-				pushMessage($userID,textBuild(\n),$access_token);
 				pushMessage($userID,textBuild($ob->u_lastname),$access_token);
 
 
