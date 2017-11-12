@@ -130,7 +130,9 @@ if (!is_null($events['events']))
 				$result->bindParam(':line_id',$userID,PDO::FETCH_ASSOC);
 				$result->execute();
 				$ob = $result->fetchObject();
-				$textResult = 'ชื่อ : '.$ob->u_name.'\n'.' นามสกุล : '.$ob->u_lastname;
+				if($ob->u_status==1) $u_status = 'ปกติ'
+				else if ($ob->u_status==0) $u_status = 'ถูกระงับการใช้งาน'
+				$textResult = 'ชื่อ : '.$ob->u_name.'   นามสกุล : '.$ob->u_lastname.'   เบอร์โทรศัพท์ : '.$ob->u_tel.'   สถานะผู้ใช้ : '.$u_status;
 				pushMessage($userID,textBuild($textResult),$access_token);
 				pushMessage($userID,textBuild('eiei'),$access_token);
 
