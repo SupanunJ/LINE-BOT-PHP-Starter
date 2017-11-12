@@ -82,10 +82,12 @@ if (!is_null($events['events']))
 	        pushMessage($userID,textBuild($text1),$access_token);
 	        pushMessage($userID,textBuild('คุณได้ทำการสมัครสมาชิกเรียบร้อยแล้ว คุณสามารถใช้งานบริการต่างๆได้ทันที'),$access_token);
 
-					$statement = $connention->prepare('INSERT INTO customer (line_id,u_name,u_lastname,u_status,u_tel,house_no,village,lane,road,subarea,area,province,postal_code,annotation) VALUES (:line_id,:u_name,:u_lastname,:u_status,:u_tel,:house_no,:village,:lane,:road,:subarea,:area,:province,:postal_code,:annotation)');
+					//,:u_name,:u_lastname,:u_status,:u_tel,:house_no,:village,:lane,:road,:subarea,:area,:province,:postal_code,:annotation
+					//,u_name,u_lastname,u_status,u_tel,house_no,village,lane,road,subarea,area,province,postal_code,annotation
+					$statement = $connention->prepare('INSERT INTO customer (line_id,u_name) VALUES (:line_id,:u_name)');
 					$statement->bindParam(':line_id',$userID);
-					$statement->bindParam(':u_name',$register[1]);
-					$statement->bindParam(':u_lastname','$register[2]');
+					$statement->bindParam(':u_name','eiei');
+					/*$statement->bindParam(':u_lastname','$register[2]');
 					$statement->bindParam(':u_status',1);
 					$statement->bindParam(':u_tel','$register[3]');
 					$statement->bindParam(':house_no','$register[4]');
@@ -96,7 +98,7 @@ if (!is_null($events['events']))
 					$statement->bindParam(':area','$register[9]');
 					$statement->bindParam(':province','$register[10]');
 					$statement->bindParam(':postal_code','$register[11]');
-					$statement->bindParam(':annotation','$register[12]');
+					$statement->bindParam(':annotation','$register[12]');*/
 					$statement->execute();
 
 				}
