@@ -84,7 +84,7 @@ if (!is_null($events['events']))
 
 					$params = array(
 							'user_id' => $userID,
-							'u_name' => $register[1],
+							/*'u_name' => $register[1],
 							'u_lastname' => $register[2],
 							'u_status' => 1,
 							'u_tel' => $register[3],
@@ -96,10 +96,11 @@ if (!is_null($events['events']))
 							'area' => $register[9],
 							'province' => $register[10],
 							'postal_code' => $register[11],
-							'annotation' => $register[12],
+							'annotation' => $register[12],*/
 					);
-					$statement = $connention->prepare('INSERT INTO customer (user_id,u_name,u_lastname,u_status,u_tel,house_no,village,lane,road,subarea,area,province,postal_code,annotation)
-																						VALUES (:user_id,:u_name,:u_lastname,:u_status,:u_tel,:house_no,:village,:lane,:road,:subarea,:area,:province,:postal_code,:annotation)');
+					//,u_name,u_lastname,u_status,u_tel,house_no,village,lane,road,subarea,area,province,postal_code,annotation
+					//,:u_name,:u_lastname,:u_status,:u_tel,:house_no,:village,:lane,:road,:subarea,:area,:province,:postal_code,:annotation
+					$statement = $connention->prepare('INSERT INTO customer (user_id) VALUES (:user_id)');
 
 					$statement->execute($params);
 
