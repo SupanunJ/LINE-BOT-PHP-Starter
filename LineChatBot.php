@@ -127,7 +127,7 @@ if (!is_null($events['events']))
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
 				$result = $connention->prepare("SELECT * FROM customer WHERE line_id = $userID");
-				$rs = $result->fetch(PDO::FETCH_ASSOC)
+				$rs = $result->fetch(PDO::FETCH_ASSOC);
 				pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
 				pushMessage($userID,textBuild($rs['line_id']),$access_token);
 				pushMessage($userID,textBuild($rs['u_name']),$access_token);
