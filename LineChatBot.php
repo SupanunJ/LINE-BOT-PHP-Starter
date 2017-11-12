@@ -131,6 +131,7 @@ if (!is_null($events['events']))
 				$result->execute();
 				$ob = $result->fetchObject();
 				pushMessage($userID,textBuild($ob->line_id),$access_token);
+				pushMessage($userID,textBuild($ob->u_name),$access_token);
 
 				pushMessage($userID,textBuild('เชคๆๆ'),$access_token);
 
