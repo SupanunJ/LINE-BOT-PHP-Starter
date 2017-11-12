@@ -127,13 +127,10 @@ if (!is_null($events['events']))
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
 				$result = $connention->prepare("SELECT * FROM customer WHERE line_id = $userID");
-				$text = $result->execute();
-				while($rs = $result->fetch())
-				{
-					pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
-					pushMessage($userID,textBuild($rs['line_id']),$access_token);
-					pushMessage($userID,textBuild($rs['u_name']),$access_token);
-				}
+				$rs = $result->fetch(PDO::FETCH_ASSOC)
+				pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
+				pushMessage($userID,textBuild($rs['line_id']),$access_token);
+				pushMessage($userID,textBuild($rs['u_name']),$access_token);
 
 				pushMessage($userID,textBuild('ข้อมูลของคุณคือ'),$access_token);
 				pushMessage($userID,confirmBuild('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่','ต้องการ','ฉันต้องการแก้ไขข้อมูล','ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล'),$access_token);
