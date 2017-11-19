@@ -228,7 +228,7 @@ function confirmBuild ($textQ,$textChoices1,$textAns1,$textChoices2,$textAns2)
   return $messages;
 }
 
-function carouselBuild ()
+function carouselBuild()
 {
 	$messages = [
 		'type' => 'template',
@@ -236,9 +236,8 @@ function carouselBuild ()
 		'template' => [
 			'type' => 'carousel',
 			'columns' => [
-				[
-				 'thumbnailImageUrl' => 'https://example.com/bot/images/item1.jpg',
-			   'title' = > 'this is menu',
+				['thumbnailImageUrl' => 'https://example.com/bot/images/item1.jpg',
+			   'title' => 'this is menu',
 			   'text' => 'description',
 			   'actions' => [
 					 ['type' => 'message',
@@ -249,12 +248,9 @@ function carouselBuild ()
 					  'text' => 'buy2'],
 					 ['type' => 'message',
 				    'label' => 'buy3',
-					  'text' => 'buy3']
-					 ]
-				 ],
-				 [
-					 'thumbnailImageUrl' => 'https://example.com/bot/images/item2.jpg',
-					 'title' = > 'this is menu',
+					  'text' => 'buy3']]],
+				 ['thumbnailImageUrl' => 'https://example.com/bot/images/item2.jpg',
+					 'title' => 'this is menu',
 	  				'text' => 'description',
 	  				'actions' => [
 	  					['type' => 'message',
@@ -265,9 +261,7 @@ function carouselBuild ()
 	  					 'text' => 'eiei2'],
 	  					['type' => 'message',
 	  					 'label' => 'eiei3',
-	  					 'text' => 'eiei3']
-						 ]
- 				]
+	  					 'text' => 'eiei3']]]
 			]
 		]
 	];
