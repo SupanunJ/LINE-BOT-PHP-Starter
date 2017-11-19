@@ -284,7 +284,7 @@ function columnBuild($title,$linkPic,$description,$actions)
 		'thumbnailImageUrl' => $linkPic,
 		 'title' => $title,
 		 'text' => $description,
-		 'actions' => [[$actions]]
+		 'actions' => [$actions]
 	];
 	return $columns;
 }
