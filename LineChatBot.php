@@ -1,4 +1,3 @@
-<<<<<<< current
 <?php
 //Connect DB
 $host = 'ec2-54-221-254-72.compute-1.amazonaws.com';
@@ -129,7 +128,7 @@ if (!is_null($events['events']))
 					$i++;
 				}
 				$columnMenu;
-				for ($j=0; $j <= count($menu_name)-1 ; $j++)
+				for ($j=0; $j < count($menu_name) ; $j++)
 				{
 					$columnMenu[$j] = columnBuild($menu_name[$j],$menu_description,uriAction('สั่งซื้อ',$menu_image[$j]));
 				}
@@ -156,7 +155,6 @@ if (!is_null($events['events']))
 				// $textResult = 'ชื่อ : '.$ob->u_name.'   นามสกุล : '.$ob->u_lastname.'   เบอร์โทรศัพท์ : '.$ob->u_tel.'   สถานะผู้ใช้ : '.$u_status;
 				// pushMessage($userID,textBuild($textResult),$access_token);
 				// pushMessage($userID,textBuild('eiei'),$access_token);
-
 				// pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
 				// pushMessage($userID,textBuild($rs['line_id']),$access_token);
 				// pushMessage($userID,textBuild($rs['u_name']),$access_token);
@@ -183,9 +181,7 @@ if (!is_null($events['events']))
     }
 	}
 }
-
 ///////////////////////////////////Build Actions/////////////////////////////////////////////////////////////////////////
-
 function messageAction ($textLabel,$textAns)
 {
 	$action = [
@@ -242,9 +238,7 @@ function locationBuild()
   ];
   return $messages;
 }
-
 ///////////////////////////////////////template//////////////////////////////////////////////////////////////////////////
-
 function buttonBuild()
 {
   $messages = [
@@ -264,7 +258,6 @@ function buttonBuild()
   ];
   return $messages;
 }
-
 function confirmBuild ($textQ,$action1,$action2)
 {
 	$messages = [
@@ -278,7 +271,6 @@ function confirmBuild ($textQ,$action1,$action2)
   ];
   return $messages;
 }
-
 function columnBuild($title,$linkPic,$description,$actions)
 {
 	$columns = [
@@ -289,7 +281,6 @@ function columnBuild($title,$linkPic,$description,$actions)
 	];
 	return $columns;
 }
-
 function carouselBuild($columns)
 {
 	$messages = [
@@ -302,9 +293,7 @@ function carouselBuild($columns)
 	];
 	return $messages;
 }
-
 //////////////////////////////////send messages//////////////////////////////////////////////////////////////////////////////
-
 function replyMessage($replyToken,$messages,$access_token)
 {
   $data = [
