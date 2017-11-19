@@ -102,7 +102,7 @@ if (!is_null($events['events']))
 			{
 				$replyToken = $event['replyToken'];
         //replyMessage($replyToken,textBuild('บริการนี้ยังไม่เปิดใช้บริการ'),$access_token);
-				replyMessage($replyToken,carouselBuild(),$access_token);
+				replyMessage($replyToken,buttonBuild(),$access_token);
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
@@ -243,7 +243,7 @@ function confirmBuild ($textQ,$textChoices1,$textAns1,$textChoices2,$textAns2)
   return $messages;
 }
 
-function carouselBuild ()
+/*function carouselBuild ()
 {
 	$messages = [
 		'type' => 'template',
@@ -285,7 +285,7 @@ function carouselBuild ()
 		]
 	];
 	return $messages;
-}
+}*/
 
 function replyMessage($replyToken,$messages,$access_token)
 {
