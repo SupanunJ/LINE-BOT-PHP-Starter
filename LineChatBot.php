@@ -117,17 +117,23 @@ if (!is_null($events['events']))
 				$result = $connention->prepare("SELECT * FROM product");
 				$text = $result->execute();
 				$i=0;
-				$menu;
+				$menu_name;
+				$menu_description;
+				$menu_image;
 				while($rs = $result->fetch())
 				{
-					$menu[$i] = $rs['p_name'];
+					$menu_name[$i] = $rs['p_name'];
+					$menu_description[$i] = $rs['p_description'];
+					$menu_image[$i] = $rs['p_image'];
 					$i++;
 				}
-				for ($i=0; $i <= count($menu) ; $i++) {
-					pushMessage($userID,textBuild($menu[$i]),$access_token);
+				$columnMenu;
+				for ($j=0; $j <= count($menu_name) ; $j++) {
+					$action = uriAction('สั่งซื้อ',$menu_image[$j]);
+					$columnMenu[$j] = columnBuild($menu_name[$j],$menu_description,$action);
 				}
-				// $groupColumns = [columnBuild('eiei1','',$description,$actions),columnBuild($title,$linkPic,$description,$actions)];
-				// carouselBuild(columnBuild($groupColumns));
+				$groupColumns = $columnMenu;
+				carouselBuild(columnBuild($groupColumns));
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
