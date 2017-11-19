@@ -211,7 +211,7 @@ function imagemapBuild()
 {
 	$messages = [
 		'type' => 'uri',
-		'linkUri' => 'https://www.google.co.th/?gws_rd=cr&ei=ieYtV-TXE8GuuQTYy53gBw',
+		'linkUri' => 'https://example.com/',
 		'area' => [
 			'x' => 0,
 			'y' => 0,
