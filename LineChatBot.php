@@ -130,17 +130,10 @@ if (!is_null($events['events']))
 				$columnMenu;
 				for ($j=0; $j < count($menu_name) ; $j++)
 				{
-					// $columnMenu[$j] = columnBuild($menu_name[$j],$menu_image[$j],$menu_description[$j],uriAction('สั่งซื้อ','https://www.youtube.com/'));
-					pushMessage($userID,textBuild($menu_name[$j]),$access_token);
-					pushMessage($userID,textBuild($menu_description[$j]),$access_token);
-					pushMessage($userID,textBuild($menu_image[$j]),$access_token);
+					$columnMenu[$j] = columnBuild($menu_name[$j],$menu_image[$j],$menu_description[$j],uriAction('สั่งซื้อ','https://www.youtube.com/'));
 				}
-				// carouselBuild($columnMenu);
-				$columnMenu = [
-					columnBuild('eiei','https://example.com/bot/images/item1.jpg','eiei',[uriAction('สั่งซื้อ','https://www.youtube.com/'),uriAction('สั่งซื้อ','https://www.youtube.com/')]),
-					columnBuild('eiei','https://example.com/bot/images/item1.jpg','eiei',[uriAction('สั่งซื้อ','https://www.youtube.com/'),uriAction('สั่งซื้อ','https://www.youtube.com/')])
-				];
 				carouselBuild($columnMenu);
+				testcarouselBuild();
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
@@ -297,6 +290,46 @@ function carouselBuild($columns)
 		'template' => [
 			'type' => 'carousel',
 			'columns' => $columns
+		]
+	];
+	return $messages;
+}
+
+function testcarouselBuild()
+{
+	$messages = [
+		'type' => 'template',
+		'altText' => 'this is a carousel template',
+		'template' => [
+			'type' => 'carousel',
+			'columns' => [
+				['thumbnailImageUrl' => 'https://example.com/bot/images/item1.jpg',
+			   'title' => 'this is menu',
+			   'text' => 'description',
+			   'actions' => [
+					 ['type' => 'message',
+				    'label' => 'buy1',
+					  'text' => 'buy1'],
+					 ['type' => 'message',
+				    'label' => 'buy2',
+					  'text' => 'buy2'],
+					 ['type' => 'uri',
+				    'label' => 'buy3',
+					  'uri' => 'https://www.youtube.com/']]],
+				 ['thumbnailImageUrl' => 'https://example.com/bot/images/item2.jpg',
+					 'title' => 'this is menu',
+	  				'text' => 'description',
+	  				'actions' => [
+	  					['type' => 'message',
+	  					 'label' => 'eiei1',
+	  					 'text' => 'eiei1'],
+	  					['type' => 'message',
+	  					 'label' => 'eiei2',
+	  					 'text' => 'eiei2'],
+	  					['type' => 'message',
+	  					 'label' => 'eiei3',
+	  					 'text' => 'eiei3']]]
+			]
 		]
 	];
 	return $messages;
