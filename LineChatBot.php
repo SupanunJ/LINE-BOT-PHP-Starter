@@ -5,7 +5,9 @@ $host = 'ec2-54-221-254-72.compute-1.amazonaws.com';
 $dbname = 'de6sfosesim5hp';
 $user = 'sicngsjfdewwql';
 $pass = 'b5cf4b4612c0625c4e9ce261c84939a5bb33bf66dd5a95cd12b5fc1792019b6d';
-$connention = new PDO("pgsql:host=$host;dbname=$dbname", $user, $pass);
+$connention = new PDO("
+
+pgsql:host=$host;dbname=$dbname", $user, $pass);
 
 //Connect Line MessagingDPI
 $access_token = 's/m2qnXnrLyOpbmE+aJ71nNBy1k2ZBJQaoBZN6e26iDAVdZ+BS510Z4fX6Wa8e9q72LLyTfQ3mrRhW3Y4Llr/SJ8J57kt5STaOI7uXzgqFYTpgLqPFVRLKRjsSmPfw93P/OhsfIjqlyUJTL007RLXgdB04t89/1O/w1cDnyilFU=';
@@ -111,7 +113,8 @@ if (!is_null($events['events']))
 			else if ($getText=='ดูเมนูและสั่งซื้อสินค้า'||$getText=='ดูเมนู'||$getText=='สั่งซื้อ')
 			{
 				$replyToken = $event['replyToken'];
-        replyMessage($replyToken,textBuild('บริการนี้ยังไม่เปิดใช้บริการ'),$access_token);
+        //replyMessage($replyToken,textBuild('บริการนี้ยังไม่เปิดใช้บริการ'),$access_token);
+				replyMessage($replyToken,imagemapBuild(),$access_token);
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
@@ -133,16 +136,9 @@ if (!is_null($events['events']))
 				if($ob->u_status==1) $u_status = 'ปกติ';
 				else if ($ob->u_status==0) $u_status = 'ถูกระงับการใช้งาน';
 				$textResult = 'ชื่อ : '.$ob->u_name.'   นามสกุล : '.$ob->u_lastname.'   เบอร์โทรศัพท์ : '.$ob->u_tel.'   สถานะผู้ใช้ : '.$u_status;
+				pushMessage($userID,textBuild('ข้อมูลของคุณคือ'),$access_token);
 				pushMessage($userID,textBuild($textResult),$access_token);
-				pushMessage($userID,textBuild('eiei'),$access_token);
-
-
-				// pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
-				// pushMessage($userID,textBuild($rs['line_id']),$access_token);
-				// pushMessage($userID,textBuild($rs['u_name']),$access_token);
-        //
-				// pushMessage($userID,textBuild('ข้อมูลของคุณคือ'),$access_token);
-				// pushMessage($userID,confirmBuild('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่','ต้องการ','ฉันต้องการแก้ไขข้อมูล','ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล'),$access_token);
+				pushMessage($userID,confirmBuild('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่','ต้องการ','ฉันต้องการแก้ไขข้อมูล','ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล'),$access_token);
 			}
 			else if ($getText=='ฉันต้องการแก้ไขข้อมูล')
 			{
@@ -221,6 +217,20 @@ function buttonBuild()
         ]
   ];
   return $messages;
+}
+
+function imagemapBuild()
+{
+	$messages = [
+		'type' => 'url',
+		'linkUrl' => 'https://www.google.co.th/?gws_rd=cr&ei=ieYtV-TXE8GuuQTYy53gBw',
+		'area' => [
+			'x' => 0,
+			'y' => 0,
+			'wight' => 520,
+			'height' => 1040
+		]
+	];
 }
 
 function confirmBuild ($textQ,$textChoices1,$textAns1,$textChoices2,$textAns2)
