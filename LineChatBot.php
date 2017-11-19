@@ -117,9 +117,9 @@ if (!is_null($events['events']))
 				$result = $connention->prepare("SELECT * FROM product");
 				$text = $result->execute();
 				$i=0;
-				$menu_name = '';
-				$menu_description = '';
-				$menu_image = '';
+				$menu_name;
+				$menu_description;
+				$menu_image;
 				while($rs = $result->fetch())
 				{
 					$menu_name[$i] = $rs['p_name'];
@@ -127,15 +127,15 @@ if (!is_null($events['events']))
 					$menu_image[$i] = $rs['p_image'];
 					$i++;
 				}
-				// $columnMenu;
+				$columnMenu;
 				for ($j=0; $j < count($menu_name) ; $j++)
 				{
-					// $columnMenu[$j] = columnBuild($menu_name[$j],$menu_description[$j],uriAction('สั่งซื้อ',$menu_image[$j]));
-					pushMessage($userID,textBuild($menu_name[$j]),$access_token);
-					pushMessage($userID,textBuild($menu_description[$j]),$access_token);
-					pushMessage($userID,textBuild($menu_image[$j]),$access_token);
+					$columnMenu[$j] = columnBuild($menu_name[$j],$menu_image[$j],$menu_description[$j],uriAction('สั่งซื้อ','https://www.youtube.com/'));
+					// pushMessage($userID,textBuild($menu_name[$j]),$access_token);
+					// pushMessage($userID,textBuild($menu_description[$j]),$access_token);
+					// pushMessage($userID,textBuild($menu_image[$j]),$access_token);
 				}
-				// carouselBuild($columnMenu);
+				carouselBuild($columnMenu);
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
