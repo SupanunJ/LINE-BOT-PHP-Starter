@@ -294,7 +294,7 @@ function carouselBuild($columns)
 		'altText' => 'this is a carousel template',
 		'template' => [
 			'type' => 'carousel',
-			'columns' => [$columns]
+			'columns' => [[$columns]]
 		]
 	];
 	return $messages;
