@@ -136,7 +136,7 @@ if (!is_null($events['events']))
 					// pushMessage($userID,textBuild($menu_image[$j]),$access_token);
 				}
 				carouselBuild($columnMenu);
-				carouselBuild(columnBuild('eiei','https://example.com/bot/images/item1.jpg','eiei',uriAction('สั่งซื้อ','https://www.youtube.com/')));
+				pushMessage($userID,textBuild('ท่านสามารถติดต่อทางร้านได้โดยช่องทางดังนี้'),$access_token);
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
