@@ -102,7 +102,7 @@ if (!is_null($events['events']))
 			{
 				$replyToken = $event['replyToken'];
         //replyMessage($replyToken,textBuild('บริการนี้ยังไม่เปิดใช้บริการ'),$access_token);
-				replyMessage($replyToken,buttonBuild(),$access_token);
+				replyMessage($replyToken,carouselBuild(),$access_token);
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
