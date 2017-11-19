@@ -114,9 +114,20 @@ if (!is_null($events['events']))
 			}*/
 			else if ($getText=='ดูเมนูและสั่งซื้อสินค้า'||$getText=='ดูเมนู'||$getText=='สั่งซื้อ')
 			{
-				$replyToken = $event['replyToken'];
-        //replyMessage($replyToken,textBuild('บริการนี้ยังไม่เปิดใช้บริการ'),$access_token);
-				replyMessage($replyToken,carouselBuild(),$access_token);
+				$result = $connention->prepare("SELECT * FROM product");
+				$text = $result->execute();
+				$i=0;
+				$menu;
+				while($rs = $result->fetch())
+				{
+					$menu[$i] = $rs['p_name'];
+					$i++;
+				}
+				for ($i=0; $i <= count($menu) ; $i++) {
+					pushMessage($userID,textBuild($menu[$i]),$access_token);
+				}
+				// $groupColumns = [columnBuild('eiei1','',$description,$actions),columnBuild($title,$linkPic,$description,$actions)];
+				// carouselBuild(columnBuild($groupColumns));
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
@@ -225,6 +236,9 @@ function locationBuild()
   ];
   return $messages;
 }
+
+///////////////////////////////////////template//////////////////////////////////////////////////////////////////////////
+
 function buttonBuild()
 {
   $messages = [
@@ -259,45 +273,31 @@ function confirmBuild ($textQ,$action1,$action2)
   return $messages;
 }
 
-function carouselBuild()
+function columnBuild($title,$linkPic,$description,$actions)
+{
+	$columns = [
+		'thumbnailImageUrl' => $linkPic,
+		 'title' => $title,
+		 'text' => $description,
+		 'actions' => $actions
+	];
+	return $columns;
+}
+
+function carouselBuild($columns)
 {
 	$messages = [
 		'type' => 'template',
 		'altText' => 'this is a carousel template',
 		'template' => [
 			'type' => 'carousel',
-			'columns' => [
-				['thumbnailImageUrl' => 'https://example.com/bot/images/item1.jpg',
-			   'title' => 'this is menu',
-			   'text' => 'description',
-			   'actions' => [
-					 ['type' => 'message',
-				    'label' => 'buy1',
-					  'text' => 'buy1'],
-					 ['type' => 'message',
-				    'label' => 'buy2',
-					  'text' => 'buy2'],
-					 ['type' => 'uri',
-				    'label' => 'buy3',
-					  'uri' => 'https://www.youtube.com/']]],
-				 ['thumbnailImageUrl' => 'https://example.com/bot/images/item2.jpg',
-					 'title' => 'this is menu',
-	  				'text' => 'description',
-	  				'actions' => [
-	  					['type' => 'message',
-	  					 'label' => 'eiei1',
-	  					 'text' => 'eiei1'],
-	  					['type' => 'message',
-	  					 'label' => 'eiei2',
-	  					 'text' => 'eiei2'],
-	  					['type' => 'message',
-	  					 'label' => 'eiei3',
-	  					 'text' => 'eiei3']]]
-			]
+			'columns' => $columns
 		]
 	];
 	return $messages;
 }
+
+//////////////////////////////////send messages//////////////////////////////////////////////////////////////////////////////
 
 function replyMessage($replyToken,$messages,$access_token)
 {
