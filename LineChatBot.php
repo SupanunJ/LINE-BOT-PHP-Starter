@@ -137,8 +137,8 @@ if (!is_null($events['events']))
 				}
 				// carouselBuild($columnMenu);
 				$columnMenu = [
-					columnBuild('eiei','https://example.com/bot/images/item1.jpg','eiei',uriAction('สั่งซื้อ','https://www.youtube.com/')),
-					columnBuild('eiei','https://example.com/bot/images/item1.jpg','eiei',uriAction('สั่งซื้อ','https://www.youtube.com/'))
+					columnBuild('eiei','https://example.com/bot/images/item1.jpg','eiei',[uriAction('สั่งซื้อ','https://www.youtube.com/'),uriAction('สั่งซื้อ','https://www.youtube.com/')]),
+					columnBuild('eiei','https://example.com/bot/images/item1.jpg','eiei',[uriAction('สั่งซื้อ','https://www.youtube.com/'),uriAction('สั่งซื้อ','https://www.youtube.com/')])
 				];
 				carouselBuild($columnMenu);
 			}
