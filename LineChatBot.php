@@ -207,21 +207,6 @@ function buttonBuild()
   return $messages;
 }
 
-function imagemapBuild()
-{
-	$messages = [
-		'type' => 'uri',
-		'linkUri' => 'https://www.google.co.th/?gws_rd=cr&ei=ieYtV-TXE8GuuQTYy53gBw',
-		'area' => [
-			'x' => 0,
-			'y' => 0,
-			'widht' => 520,
-			'height' => 1040
-		]
-	];
-	return $messages;
-}
-
 function confirmBuild ($textQ,$textChoices1,$textAns1,$textChoices2,$textAns2)
 {
 	$messages = [
@@ -243,9 +228,9 @@ function confirmBuild ($textQ,$textChoices1,$textAns1,$textChoices2,$textAns2)
   return $messages;
 }
 
-/*function carouselBuild ()
+function carouselBuild ()
 {
-	$messages = [
+	/*$messages = [
 		'type' => 'template',
 		'altText' => 'this is a carousel template',
 		'template' => [
@@ -283,9 +268,62 @@ function confirmBuild ($textQ,$textChoices1,$textAns1,$textChoices2,$textAns2)
  				]
 			]
 		]
-	];
+	];*/
+	$messages = [
+		"type": "template",
+  "altText": "this is a carousel template",
+  "template": [
+      "type": "carousel",
+      "columns": [
+          [
+            "thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
+            "title": "this is menu",
+            "text": "description",
+            "actions": [
+                [
+                    "type": "postback",
+                    "label": "Buy",
+                    "data": "action=buy&itemid=111"
+                ],
+                [
+                    "type": "postback",
+                    "label": "Add to cart",
+                    "data": "action=add&itemid=111"
+                ],
+                [
+                    "type": "uri",
+                    "label": "View detail",
+                    "uri": "http://example.com/page/111"
+                ]
+            ]
+          ],
+          [
+            "thumbnailImageUrl": "https://example.com/bot/images/item2.jpg",
+            "title": "this is menu",
+            "text": "description",
+            "actions": [
+                [
+                    "type": "postback",
+                    "label": "Buy",
+                    "data": "action=buy&itemid=222"
+                ],
+                [
+                    "type": "postback",
+                    "label": "Add to cart",
+                    "data": "action=add&itemid=222"
+                ],
+                [
+                    "type": "uri",
+                    "label": "View detail",
+                    "uri": "http://example.com/page/222"
+                ]
+            ]
+          ]
+      ]
+  ]
+];
 	return $messages;
-}*/
+}
 
 function replyMessage($replyToken,$messages,$access_token)
 {
