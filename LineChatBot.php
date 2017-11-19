@@ -134,7 +134,7 @@ if (!is_null($events['events']))
 				}
 				pushMessage($userID,carouselBuild($columnMenu[0]),$access_token);
 				pushMessage($userID,carouselBuild([$columnMenu[0],$columnMenu[1],$columnMenu[2]]),$access_token);
-				pushMessage($userID,testcarouselBuild(),$access_token);
+				// pushMessage($userID,testcarouselBuild(),$access_token);
 				// $columnMenu = [
  				// 	columnBuild('eiei','https://example.com/bot/images/item1.jpg','eiei',[uriAction('สั่งซื้อ','https://www.youtube.com/'),uriAction('สั่งซื้อ','https://www.youtube.com/')]),
  				// 	columnBuild('eiei','https://example.com/bot/images/item1.jpg','eiei',[uriAction('สั่งซื้อ','https://www.youtube.com/'),uriAction('สั่งซื้อ','https://www.youtube.com/')])
