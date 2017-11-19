@@ -54,7 +54,8 @@ if (!is_null($events['events']))
 				}
 				if(!$user_check)
 				{
-
+					$con_title = 'ในการสมัครสมาชิกคุณจะต้องกรอกข้อมูลตามจริงเพื่อรักษาสิทธิประโยชน์ของคุณ ท่านต้องการสมัครสมาชิกหรือไม่';
+					pushMessage($userID,confirmBuild($con_title,uriAction('ต้องการ','https://www.youtube.com/'),messageAction('ไม่ต้องการ','ไม่ต้องการ')),$access_token);
 				}
 				if($user_check)
 				{
