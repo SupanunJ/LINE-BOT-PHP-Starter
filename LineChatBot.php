@@ -42,13 +42,26 @@ if (!is_null($events['events']))
 			}
 			if ($getText=='สมัครสมาชิก')
 			{
-				$replyToken = $event['replyToken'];
-        replyMessage($replyToken,textBuild('กรุณากรอกข้อมูลที่เป็นจริงเพื่อคุณจะได้รับบริการที่ถูกต้อง'),$access_token);
-        pushMessage($userID,textBuild('กรุณากรอกข้อมูลดังต่อไปนี้ : สมัครสมาชิก,ชื่อ,นามสกุล,เบอร์โทร์ศัพท์ที่ติดต่อได้,บ้านเลขที่,ซอย,หมู่บ้าน,แขวง,อำเภอ,จังหวัด,รหัสไปรษณีย์,ข้อมูลอื่นๆ'),$access_token);
-        pushMessage($userID,textBuild('*กรณีที่ ที่อยู่ของคุณ มีหมายเลขห้องหรือชั้นด้วย กรุณาใส่ใน ข้อมูลอื่นๆ'),$access_token);
-        pushMessage($userID,textBuild('**กรณีที่ ข้อมูลใดไม่มีให้คุณใส่ ไม่มี หรือ - '),$access_token);
+				$result = $connention->prepare("SELECT * FROM customer");
+				$text = $result->execute();
+				$user_check = false;
+				while($rs = $result->fetch())
+				{
+					if($userID==$rs['line_id'])
+					{
+						$user_check = true;
+					}
+				}
+				if(!$user_check)
+				{
+					
+				}
+				if($user_check)
+				{
+					pushMessage($userID,textBuild('คุณไม่สามารถสมัครสมาชิกได้เนื่องจากคุณเป็นสมาชิกอยู่แล้ว'),$access_token);
+				}
 			}
-			else if (strpos($getText,"สมัครสมาชิก,")!==false)
+			/*else if (strpos($getText,"สมัครสมาชิก,")!==false)
 			{
 				$result = $connention->prepare("SELECT * FROM customer");
 				$text = $result->execute();
@@ -97,7 +110,7 @@ if (!is_null($events['events']))
 				{
 					pushMessage($userID,textBuild('คุณไม่สามารถสมัครสมาชิกได้เนื่องจากคุณเป็นสมาชิกอยู่แล้ว'),$access_token);
 				}
-			}
+			}*/
 			else if ($getText=='ดูเมนูและสั่งซื้อสินค้า'||$getText=='ดูเมนู'||$getText=='สั่งซื้อ')
 			{
 				$replyToken = $event['replyToken'];
@@ -116,21 +129,22 @@ if (!is_null($events['events']))
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
-				$result = $connention->prepare("SELECT * FROM customer WHERE line_id = :line_id");
-				$result->bindParam(':line_id',$userID,PDO::FETCH_ASSOC);
-				$result->execute();
-				$ob = $result->fetchObject();
-				if($ob->u_status==1) $u_status = 'ปกติ';
-				else if ($ob->u_status==0) $u_status = 'ถูกระงับการใช้งาน';
-				$textResult = 'ชื่อ : '.$ob->u_name.'   นามสกุล : '.$ob->u_lastname.'   เบอร์โทรศัพท์ : '.$ob->u_tel.'   สถานะผู้ใช้ : '.$u_status;
-				pushMessage($userID,textBuild($textResult),$access_token);
-				pushMessage($userID,textBuild('eiei'),$access_token);
+				// $result = $connention->prepare("SELECT * FROM customer WHERE line_id = :line_id");
+				// $result->bindParam(':line_id',$userID,PDO::FETCH_ASSOC);
+				// $result->execute();
+				// $ob = $result->fetchObject();
+				// if($ob->u_status==1) $u_status = 'ปกติ';
+				// else if ($ob->u_status==0) $u_status = 'ถูกระงับการใช้งาน';
+				// $textResult = 'ชื่อ : '.$ob->u_name.'   นามสกุล : '.$ob->u_lastname.'   เบอร์โทรศัพท์ : '.$ob->u_tel.'   สถานะผู้ใช้ : '.$u_status;
+				// pushMessage($userID,textBuild($textResult),$access_token);
+				// pushMessage($userID,textBuild('eiei'),$access_token);
+
 				// pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
 				// pushMessage($userID,textBuild($rs['line_id']),$access_token);
 				// pushMessage($userID,textBuild($rs['u_name']),$access_token);
         //
 				// pushMessage($userID,textBuild('ข้อมูลของคุณคือ'),$access_token);
-				// pushMessage($userID,confirmBuild('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่','ต้องการ','ฉันต้องการแก้ไขข้อมูล','ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล'),$access_token);
+				 pushMessage($userID,confirmBuild('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่','ต้องการ','ฉันต้องการแก้ไขข้อมูล','ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล'),$access_token);
 			}
 			else if ($getText=='ฉันต้องการแก้ไขข้อมูล')
 			{
@@ -149,6 +163,27 @@ if (!is_null($events['events']))
       pushMessage($userID,stickerBuild(),$access_token);
     }
 	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function messageAction ()
+{
+	$action = [
+		'type' => 'message',
+		'label' => $textChoices1,
+		'text' => $textAns1
+	];
+	return $action;
+}
+function uriAction($textUri)
+{
+	$action = [
+		'type' => 'uri',
+		 'label' => 'buy3',
+		 'uri' => $textUri
+	];
+	return $action;
 }
 function textBuild($text)
 {
