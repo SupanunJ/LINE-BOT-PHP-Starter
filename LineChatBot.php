@@ -129,7 +129,7 @@ if (!is_null($events['events']))
 					$i++;
 				}
 				$columnMenu;
-				for ($j=0; $j <= count($menu_name) ; $j++)
+				for ($j=0; $j <= count($menu_name)-1 ; $j++)
 				{
 					$columnMenu[$j] = columnBuild($menu_name[$j],$menu_description,uriAction('สั่งซื้อ',$menu_image[$j]));
 				}
