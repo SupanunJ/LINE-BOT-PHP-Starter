@@ -102,7 +102,7 @@ if (!is_null($events['events']))
 			{
 				$replyToken = $event['replyToken'];
         //replyMessage($replyToken,textBuild('บริการนี้ยังไม่เปิดใช้บริการ'),$access_token);
-				replyMessage($replyToken,imagemapBuild(),$access_token);
+				replyMessage($replyToken,carouselBuild(),$access_token);
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
@@ -242,6 +242,51 @@ function confirmBuild ($textQ,$textChoices1,$textAns1,$textChoices2,$textAns2)
   ];
   return $messages;
 }
+
+function carouselBuild ()
+{
+	$messages = [
+		'type' => 'template',
+		'altText' => 'this is carousel template',
+		'template' => [
+			'type' => 'carousel',
+			'columns' => [
+				['thumbnailImageUrl' => 'https://example.com/bot/images/item1.jpg',
+			   'title' = > 'this is menu',
+			   'text' => 'description',
+			   'actions' => [
+					 ['type' => 'message',
+				    'label' => 'buy1',
+					  'text' => 'buy1'],
+					 ['type' => 'message',
+				    'label' => 'buy2',
+					  'text' => 'buy2']
+					 ['type' => 'message',
+				    'label' => 'buy3',
+					  'text' => 'buy3']
+					 ]
+				 ],
+				 ['thumbnailImageUrl' => 'https://example.com/bot/images/item1.jpg',
+ 			   'title' = > 'this is menu',
+ 			   'text' => 'description',
+ 			   'actions' => [
+ 					 ['type' => 'message',
+ 				    'label' => 'eiei1',
+ 					  'text' => 'eiei1'],
+ 					 ['type' => 'message',
+ 				    'label' => 'eiei2',
+ 					  'text' => 'eiei2']
+ 					 ['type' => 'message',
+ 				    'label' => 'eiei3',
+ 					  'text' => 'eiei3']
+ 					 ]
+ 				 ]
+			]
+		]
+	];
+	return $messages;
+}
+
 function replyMessage($replyToken,$messages,$access_token)
 {
   $data = [
