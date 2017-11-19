@@ -62,7 +62,7 @@ if (!is_null($events['events']))
 					pushMessage($userID,textBuild('คุณไม่สามารถสมัครสมาชิกได้เนื่องจากคุณเป็นสมาชิกอยู่แล้ว'),$access_token);
 				}
 			}
-			/*else if (strpos($getText,"สมัครสมาชิก,")!==false)
+			else if (strpos($getText,"สมัครสมาชิก,")!==false)
 			{
 				$result = $connention->prepare("SELECT * FROM customer");
 				$text = $result->execute();
@@ -111,7 +111,7 @@ if (!is_null($events['events']))
 				{
 					pushMessage($userID,textBuild('คุณไม่สามารถสมัครสมาชิกได้เนื่องจากคุณเป็นสมาชิกอยู่แล้ว'),$access_token);
 				}
-			}*/
+			}
 			else if ($getText=='ดูเมนูและสั่งซื้อสินค้า'||$getText=='ดูเมนู'||$getText=='สั่งซื้อ')
 			{
 				$result = $connention->prepare("SELECT * FROM customer");
