@@ -1,14 +1,10 @@
 <?php
-
 //Connect DB
 $host = 'ec2-54-221-254-72.compute-1.amazonaws.com';
 $dbname = 'de6sfosesim5hp';
 $user = 'sicngsjfdewwql';
 $pass = 'b5cf4b4612c0625c4e9ce261c84939a5bb33bf66dd5a95cd12b5fc1792019b6d';
-$connention = new PDO("
-
-pgsql:host=$host;dbname=$dbname", $user, $pass);
-
+$connention = new PDO("pgsql:host=$host;dbname=$dbname", $user, $pass);
 //Connect Line MessagingDPI
 $access_token = 's/m2qnXnrLyOpbmE+aJ71nNBy1k2ZBJQaoBZN6e26iDAVdZ+BS510Z4fX6Wa8e9q72LLyTfQ3mrRhW3Y4Llr/SJ8J57kt5STaOI7uXzgqFYTpgLqPFVRLKRjsSmPfw93P/OhsfIjqlyUJTL007RLXgdB04t89/1O/w1cDnyilFU=';
 // Get POST body content
@@ -26,7 +22,6 @@ if (!is_null($events['events']))
 		{
 			$getText = $event['message']['text'];
 			$userID = $event['source']['userId'];
-
 			if($getText=='ยังไง')
 			{
 				$result = $connention->prepare("SELECT * FROM customer");
@@ -36,9 +31,7 @@ if (!is_null($events['events']))
 					pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
 					pushMessage($userID,textBuild($rs['line_id']),$access_token);
 				}
-
 				pushMessage($userID,textBuild($userID),$access_token);
-
 				//$textquery = sprintf("%s",$result);
 				/*if($result!=null)
 				{
@@ -47,7 +40,6 @@ if (!is_null($events['events']))
 					//pushMessage($userID,textBuild($textquery),$access_token);
 				}*/
 			}
-
 			if ($getText=='สมัครสมาชิก')
 			{
 				$replyToken = $event['replyToken'];
@@ -68,7 +60,6 @@ if (!is_null($events['events']))
 						$user_check = true;
 					}
 				}
-
 				if(!$user_check)
 				{
 					$text = str_replace('สมัครสมาชิก','',$getText);
@@ -83,10 +74,8 @@ if (!is_null($events['events']))
 					$text1 = $ansText;
 	        pushMessage($userID,textBuild($text1),$access_token);
 	        pushMessage($userID,textBuild('คุณได้ทำการสมัครสมาชิกเรียบร้อยแล้ว คุณสามารถใช้งานบริการต่างๆได้ทันที'),$access_token);
-
 					//Query INSERT REGISTER
 					$statement = $connention->prepare('INSERT INTO customer (line_id, u_name,u_lastname,u_status,u_tel,house_no,village,lane,road,subarea,area,province,postal_code,annotation) VALUES (:line_id, :u_name, :u_lastname, :u_status, :u_tel, :house_no, :village, :lane, :road, :subarea, :area, :province, :postal_code, :annotation)');
-
 					$statement->execute(array(
 						'line_id' => $userID,
 						'u_name' => $register[1],
@@ -103,7 +92,6 @@ if (!is_null($events['events']))
 						'postal_code' => $register[11],
 						'annotation' => $register[12]
 					));
-
 				}
 				if($user_check)
 				{
@@ -114,7 +102,6 @@ if (!is_null($events['events']))
 			{
 				$replyToken = $event['replyToken'];
         replyMessage($replyToken,textBuild('บริการนี้ยังไม่เปิดใช้บริการ'),$access_token);
-				//replyMessage($replyToken,imagemapBuild(),$access_token);
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
@@ -125,7 +112,6 @@ if (!is_null($events['events']))
 				pushMessage($userID,textBuild('ท่านสามารถติดต่อทางร้านได้โดยช่องทางดังนี้'),$access_token);
 				pushMessage($userID,locationBuild(),$access_token);
         pushMessage($userID,textBuild('เบอรโทรศัพท์ 0817349462 และ 0818178962'),$access_token);
-
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
@@ -136,9 +122,14 @@ if (!is_null($events['events']))
 				if($ob->u_status==1) $u_status = 'ปกติ';
 				else if ($ob->u_status==0) $u_status = 'ถูกระงับการใช้งาน';
 				$textResult = 'ชื่อ : '.$ob->u_name.'   นามสกุล : '.$ob->u_lastname.'   เบอร์โทรศัพท์ : '.$ob->u_tel.'   สถานะผู้ใช้ : '.$u_status;
-				pushMessage($userID,textBuild('ข้อมูลของคุณคือ'),$access_token);
 				pushMessage($userID,textBuild($textResult),$access_token);
-				pushMessage($userID,confirmBuild('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่','ต้องการ','ฉันต้องการแก้ไขข้อมูล','ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล'),$access_token);
+				pushMessage($userID,textBuild('eiei'),$access_token);
+				// pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
+				// pushMessage($userID,textBuild($rs['line_id']),$access_token);
+				// pushMessage($userID,textBuild($rs['u_name']),$access_token);
+        //
+				// pushMessage($userID,textBuild('ข้อมูลของคุณคือ'),$access_token);
+				// pushMessage($userID,confirmBuild('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่','ต้องการ','ฉันต้องการแก้ไขข้อมูล','ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล'),$access_token);
 			}
 			else if ($getText=='ฉันต้องการแก้ไขข้อมูล')
 			{
@@ -166,7 +157,6 @@ function textBuild($text)
 			];
   return $messages;
 }
-
 function stickerBuild()
 {
   $messages = [
@@ -176,7 +166,6 @@ function stickerBuild()
   ];
   return $messages;
 }
-
 function imageBuild($original,$preview)
 {
   $messages = [
@@ -186,7 +175,6 @@ function imageBuild($original,$preview)
   ];
   return $messages;
 }
-
 function locationBuild()
 {
   $messages = [
@@ -198,7 +186,6 @@ function locationBuild()
   ];
   return $messages;
 }
-
 function buttonBuild()
 {
   $messages = [
@@ -218,21 +205,6 @@ function buttonBuild()
   ];
   return $messages;
 }
-
-/*function imagemapBuild()
-{
-	$messages = [
-		'type' => 'url',
-		'linkUrl' => 'https://www.google.co.th/?gws_rd=cr&ei=ieYtV-TXE8GuuQTYy53gBw',
-		'area' => [
-			'x' => 0,
-			'y' => 0,
-			'wight' => 520,
-			'height' => 1040
-		]
-	];
-}*/
-
 function confirmBuild ($textQ,$textChoices1,$textAns1,$textChoices2,$textAns2)
 {
 	$messages = [
