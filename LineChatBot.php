@@ -113,8 +113,8 @@ if (!is_null($events['events']))
 			else if ($getText=='ดูเมนูและสั่งซื้อสินค้า'||$getText=='ดูเมนู'||$getText=='สั่งซื้อ')
 			{
 				$replyToken = $event['replyToken'];
-        //replyMessage($replyToken,textBuild('บริการนี้ยังไม่เปิดใช้บริการ'),$access_token);
-				replyMessage($replyToken,imagemapBuild(),$access_token);
+        replyMessage($replyToken,textBuild('บริการนี้ยังไม่เปิดใช้บริการ'),$access_token);
+				//replyMessage($replyToken,imagemapBuild(),$access_token);
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
@@ -219,7 +219,7 @@ function buttonBuild()
   return $messages;
 }
 
-function imagemapBuild()
+/*function imagemapBuild()
 {
 	$messages = [
 		'type' => 'url',
@@ -231,7 +231,7 @@ function imagemapBuild()
 			'height' => 1040
 		]
 	];
-}
+}*/
 
 function confirmBuild ($textQ,$textChoices1,$textAns1,$textChoices2,$textAns2)
 {
