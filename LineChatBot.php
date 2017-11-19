@@ -133,6 +133,7 @@ if (!is_null($events['events']))
 					$columnMenu[$j] = columnBuild($menu_name[$j],$menu_image[$j],$menu_description[$j],uriAction('สั่งซื้อ','https://www.youtube.com/'));
 				}
 				pushMessage($userID,carouselBuild($columnMenu[0]),$access_token);
+				pushMessage($userID,carouselBuild($columnMenu),$access_token);
 				pushMessage($userID,testcarouselBuild(),$access_token);
 				// $columnMenu = [
  				// 	columnBuild('eiei','https://example.com/bot/images/item1.jpg','eiei',[uriAction('สั่งซื้อ','https://www.youtube.com/'),uriAction('สั่งซื้อ','https://www.youtube.com/')]),
@@ -283,7 +284,7 @@ function columnBuild($title,$linkPic,$description,$actions)
 		'thumbnailImageUrl' => $linkPic,
 		 'title' => $title,
 		 'text' => $description,
-		 'actions' => [$actions]
+		 'actions' => [[$actions]]
 	];
 	return $columns;
 }
@@ -294,7 +295,7 @@ function carouselBuild($columns)
 		'altText' => 'this is a carousel template',
 		'template' => [
 			'type' => 'carousel',
-			'columns' => [[$columns]]
+			'columns' => [$columns]
 		]
 	];
 	return $messages;
