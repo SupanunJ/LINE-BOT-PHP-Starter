@@ -210,8 +210,8 @@ function buttonBuild()
 function imagemapBuild()
 {
 	$messages = [
-		'type' => 'url',
-		'linkUrl' => 'https://www.google.co.th/?gws_rd=cr&ei=ieYtV-TXE8GuuQTYy53gBw',
+		'type' => 'uri',
+		'linkUri' => 'https://www.google.co.th/?gws_rd=cr&ei=ieYtV-TXE8GuuQTYy53gBw',
 		'area' => [
 			'x' => 0,
 			'y' => 0,
