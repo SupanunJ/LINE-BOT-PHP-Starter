@@ -130,13 +130,17 @@ if (!is_null($events['events']))
 				$columnMenu;
 				for ($j=0; $j < count($menu_name) ; $j++)
 				{
-					$columnMenu[$j] = columnBuild($menu_name[$j],$menu_image[$j],$menu_description[$j],uriAction('สั่งซื้อ','https://www.youtube.com/'));
-					// pushMessage($userID,textBuild($menu_name[$j]),$access_token);
-					// pushMessage($userID,textBuild($menu_description[$j]),$access_token);
-					// pushMessage($userID,textBuild($menu_image[$j]),$access_token);
+					// $columnMenu[$j] = columnBuild($menu_name[$j],$menu_image[$j],$menu_description[$j],uriAction('สั่งซื้อ','https://www.youtube.com/'));
+					pushMessage($userID,textBuild($menu_name[$j]),$access_token);
+					pushMessage($userID,textBuild($menu_description[$j]),$access_token);
+					pushMessage($userID,textBuild($menu_image[$j]),$access_token);
 				}
+				// carouselBuild($columnMenu);
+				$columnMenu = [
+					columnBuild('eiei','https://example.com/bot/images/item1.jpg','eiei',uriAction('สั่งซื้อ','https://www.youtube.com/')),
+					columnBuild('eiei','https://example.com/bot/images/item1.jpg','eiei',uriAction('สั่งซื้อ','https://www.youtube.com/'))
+				];
 				carouselBuild($columnMenu);
-				pushMessage($userID,textBuild('ท่านสามารถติดต่อทางร้านได้โดยช่องทางดังนี้'),$access_token);
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
