@@ -127,13 +127,12 @@ if (!is_null($events['events']))
 					$menu_image[$i] = $rs['p_image'];
 					$i++;
 				}
-				// $columnMenu;
-				// for ($j=0; $j < count($menu_name) ; $j++)
-				// {
-				// 	$columnMenu[$j] = columnBuild($menu_name[$j],$menu_image[$j],$menu_description[$j],uriAction('สั่งซื้อ','https://www.youtube.com/'));
-				// }
-				// carouselBuild($columnMenu);
-				testcarouselBuild();
+				$columnMenu;
+				for ($j=0; $j < count($menu_name) ; $j++)
+				{
+					$columnMenu[$j] = columnBuild($menu_name[$j],$menu_image[$j],$menu_description[$j],uriAction('สั่งซื้อ','https://www.youtube.com/'));
+				}
+				pushMessage($userID,carouselBuild($columnMenu),$access_token);
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
