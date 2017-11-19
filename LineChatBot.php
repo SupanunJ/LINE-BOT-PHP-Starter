@@ -283,7 +283,7 @@ function columnBuild($title,$linkPic,$description,$actions)
 		'thumbnailImageUrl' => $linkPic,
 		 'title' => $title,
 		 'text' => $description,
-		 'actions' => $actions
+		 'actions' => [$actions]
 	];
 	return $columns;
 }
@@ -294,7 +294,7 @@ function carouselBuild($columns)
 		'altText' => 'this is a carousel template',
 		'template' => [
 			'type' => 'carousel',
-			'columns' => $columns
+			'columns' => [$columns]
 		]
 	];
 	return $messages;
