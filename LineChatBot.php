@@ -54,7 +54,7 @@ if (!is_null($events['events']))
 				}
 				if(!$user_check)
 				{
-					
+
 				}
 				if($user_check)
 				{
@@ -144,7 +144,8 @@ if (!is_null($events['events']))
 				// pushMessage($userID,textBuild($rs['u_name']),$access_token);
         //
 				// pushMessage($userID,textBuild('ข้อมูลของคุณคือ'),$access_token);
-				 pushMessage($userID,confirmBuild('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่','ต้องการ','ฉันต้องการแก้ไขข้อมูล','ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล'),$access_token);
+				 // pushMessage($userID,confirmBuild('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่','ต้องการ','ฉันต้องการแก้ไขข้อมูล','ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล'),$access_token);
+				 pushMessage($userID,confirmBuild ('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่',uriAction('ต้องการ','ฉันต้องการแก้ไขข้อมูล'),uriAction('ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล')),$access_token);
 			}
 			else if ($getText=='ฉันต้องการแก้ไขข้อมูล')
 			{
@@ -165,26 +166,27 @@ if (!is_null($events['events']))
 	}
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////Build Actions/////////////////////////////////////////////////////////////////////////
 
-function messageAction ()
+function messageAction ($textLabel,$textAns)
 {
 	$action = [
 		'type' => 'message',
-		'label' => $textChoices1,
-		'text' => $textAns1
+		'label' => $textLabel,
+		'text' => $textAns
 	];
 	return $action;
 }
-function uriAction($textUri)
+function uriAction($textLabel,$textUri)
 {
 	$action = [
 		'type' => 'uri',
-		 'label' => 'buy3',
+		 'label' => $textLabel,
 		 'uri' => $textUri
 	];
 	return $action;
 }
+//////////////////////////////////Build messages///////////////////////////////////////////////////////////////////////////
 function textBuild($text)
 {
   $messages = [
@@ -242,7 +244,7 @@ function buttonBuild()
   return $messages;
 }
 
-function confirmBuild ($textQ,$textChoices1,$textAns1,$textChoices2,$textAns2)
+function confirmBuild ($textQ,$action1,$action2)
 {
 	$messages = [
       'type' => 'template',
@@ -250,14 +252,7 @@ function confirmBuild ($textQ,$textChoices1,$textAns1,$textChoices2,$textAns2)
       'template' => [
           'type' => 'confirm',
           'text' => $textQ,
-          'actions' => [
-              ['type' => 'message',
-              'label' => $textChoices1,
-              'text' => $textAns1],
-              ['type' => 'message',
-              'label' => $textChoices2,
-              'text' => $textAns2]
-          ]
+          'actions' => [$action1,$action2]
       ]
   ];
   return $messages;
