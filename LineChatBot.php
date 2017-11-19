@@ -117,9 +117,9 @@ if (!is_null($events['events']))
 				$result = $connention->prepare("SELECT * FROM product");
 				$text = $result->execute();
 				$i=0;
-				$menu_name;
-				$menu_description;
-				$menu_image;
+				$menu_name = '';
+				$menu_description = '';
+				$menu_image = '';
 				while($rs = $result->fetch())
 				{
 					$menu_name[$i] = $rs['p_name'];
