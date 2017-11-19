@@ -101,7 +101,8 @@ if (!is_null($events['events']))
 			else if ($getText=='ดูเมนูและสั่งซื้อสินค้า'||$getText=='ดูเมนู'||$getText=='สั่งซื้อ')
 			{
 				$replyToken = $event['replyToken'];
-        replyMessage($replyToken,textBuild('บริการนี้ยังไม่เปิดใช้บริการ'),$access_token);
+        //replyMessage($replyToken,textBuild('บริการนี้ยังไม่เปิดใช้บริการ'),$access_token);
+				replyMessage($replyToken,imagemapBuild(),$access_token);
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
@@ -205,6 +206,22 @@ function buttonBuild()
   ];
   return $messages;
 }
+
+function imagemapBuild()
+{
+	$messages = [
+		'type' => 'url',
+		'linkUrl' => 'https://www.google.co.th/?gws_rd=cr&ei=ieYtV-TXE8GuuQTYy53gBw',
+		'area' => [
+			'x' => 0,
+			'y' => 0,
+			'wight' => 520,
+			'height' => 1040
+		]
+	];
+	return $messages;
+}
+
 function confirmBuild ($textQ,$textChoices1,$textAns1,$textChoices2,$textAns2)
 {
 	$messages = [
