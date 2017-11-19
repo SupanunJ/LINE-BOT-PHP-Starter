@@ -130,7 +130,7 @@ if (!is_null($events['events']))
 				$columnMenu;
 				for ($j=0; $j < count($menu_name) ; $j++)
 				{
-					$columnMenu[$j] = columnBuild($menu_name[$j],$menu_description,uriAction('สั่งซื้อ',$menu_image[$j]));
+					$columnMenu[$j] = columnBuild($menu_name[$j],$menu_description[$j],uriAction('สั่งซื้อ',$menu_image[$j]));
 				}
 				carouselBuild($columnMenu);
 			}
