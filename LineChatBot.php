@@ -133,12 +133,6 @@ if (!is_null($events['events']))
 					$columnMenu[$j] = columnBuild($menu_name[$j],$menu_image[$j],$menu_description[$j],uriAction('สั่งซื้อ','https://www.youtube.com/'));
 				}
 				pushMessage($userID,carouselBuild($columnMenu),$access_token);
-				// pushMessage($userID,testcarouselBuild(),$access_token);
-				// $columnMenu = [
- 				// 	columnBuild('eiei','https://example.com/bot/images/item1.jpg','eiei',[uriAction('สั่งซื้อ','https://www.youtube.com/'),uriAction('สั่งซื้อ','https://www.youtube.com/')]),
- 				// 	columnBuild('eiei','https://example.com/bot/images/item1.jpg','eiei',[uriAction('สั่งซื้อ','https://www.youtube.com/'),uriAction('สั่งซื้อ','https://www.youtube.com/')])
- 				// ];
-				// pushMessage($userID,carouselBuild($columnMenu),$access_token);
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
@@ -152,14 +146,14 @@ if (!is_null($events['events']))
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
-				// $result = $connention->prepare("SELECT * FROM customer WHERE line_id = :line_id");
-				// $result->bindParam(':line_id',$userID,PDO::FETCH_ASSOC);
-				// $result->execute();
-				// $ob = $result->fetchObject();
-				// if($ob->u_status==1) $u_status = 'ปกติ';
-				// else if ($ob->u_status==0) $u_status = 'ถูกระงับการใช้งาน';
-				// $textResult = 'ชื่อ : '.$ob->u_name.'   นามสกุล : '.$ob->u_lastname.'   เบอร์โทรศัพท์ : '.$ob->u_tel.'   สถานะผู้ใช้ : '.$u_status;
-				// pushMessage($userID,textBuild($textResult),$access_token);
+				$result = $connention->prepare("SELECT * FROM customer WHERE line_id = :line_id");
+				$result->bindParam(':line_id',$userID,PDO::FETCH_ASSOC);
+				$result->execute();
+				$ob = $result->fetchObject();
+				if($ob->u_status==1) $u_status = 'ปกติ';
+				else if ($ob->u_status==0) $u_status = 'ถูกระงับการใช้งาน';
+				$textResult = 'ชื่อ : '.$ob->u_name.'   นามสกุล : '.$ob->u_lastname.'   เบอร์โทรศัพท์ : '.$ob->u_tel.'   สถานะผู้ใช้ : '.$u_status;
+				pushMessage($userID,textBuild($textResult),$access_token);
 				// pushMessage($userID,textBuild('eiei'),$access_token);
 				// pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
 				// pushMessage($userID,textBuild($rs['line_id']),$access_token);
