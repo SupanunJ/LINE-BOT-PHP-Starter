@@ -260,7 +260,7 @@ function carouselBuild ()
 					  'text' => 'buy1'],
 					 ['type' => 'message',
 				    'label' => 'buy2',
-					  'text' => 'buy2']
+					  'text' => 'buy2'],
 					 ['type' => 'message',
 				    'label' => 'buy3',
 					  'text' => 'buy3']
@@ -275,7 +275,7 @@ function carouselBuild ()
  					  'text' => 'eiei1'],
  					 ['type' => 'message',
  				    'label' => 'eiei2',
- 					  'text' => 'eiei2']
+ 					  'text' => 'eiei2'],
  					 ['type' => 'message',
  				    'label' => 'eiei3',
  					  'text' => 'eiei3']
