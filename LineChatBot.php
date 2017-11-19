@@ -248,7 +248,7 @@ function carouselBuild()
 					  'text' => 'buy2'],
 					 ['type' => 'uri',
 				    'label' => 'buy3',
-					  'text' => 'https://www.youtube.com/']]],
+					  'uri' => 'https://www.youtube.com/']]],
 				 ['thumbnailImageUrl' => 'https://example.com/bot/images/item2.jpg',
 					 'title' => 'this is menu',
 	  				'text' => 'description',
