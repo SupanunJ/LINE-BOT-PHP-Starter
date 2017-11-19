@@ -114,25 +114,43 @@ if (!is_null($events['events']))
 			}*/
 			else if ($getText=='ดูเมนูและสั่งซื้อสินค้า'||$getText=='ดูเมนู'||$getText=='สั่งซื้อ')
 			{
-				$result = $connention->prepare("SELECT * FROM product");
+				$result = $connention->prepare("SELECT * FROM customer");
 				$text = $result->execute();
-				$i=0;
-				$menu_name;
-				$menu_description;
-				$menu_image;
+				$user_check = false;
 				while($rs = $result->fetch())
 				{
-					$menu_name[$i] = $rs['p_name'];
-					$menu_description[$i] = $rs['p_description'];
-					$menu_image[$i] = $rs['p_image'];
-					$i++;
+					if($userID==$rs['line_id'])
+					{
+						$user_check = true;
+					}
 				}
-				$columnMenu;
-				for ($j=0; $j < count($menu_name) ; $j++)
+				if(!$user_check)
 				{
-					$columnMenu[$j] = columnBuild($menu_name[$j],$menu_image[$j],$menu_description[$j],uriAction('สั่งซื้อ','https://www.youtube.com/'));
+					$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
+					pushMessage($userID,confirmBuild($con_title,uriAction('สม้ครสมาชิก','https://www.youtube.com/'),messageAction('ไม่ต้องการ','ไม่ต้องการ')),$access_token);
 				}
-				pushMessage($userID,carouselBuild($columnMenu),$access_token);
+				if($user_check)
+				{
+					$result = $connention->prepare("SELECT * FROM product");
+					$text = $result->execute();
+					$i=0;
+					$menu_name;
+					$menu_description;
+					$menu_image;
+					while($rs = $result->fetch())
+					{
+						$menu_name[$i] = $rs['p_name'];
+						$menu_description[$i] = $rs['p_description'];
+						$menu_image[$i] = $rs['p_image'];
+						$i++;
+					}
+					$columnMenu;
+					for ($j=0; $j < count($menu_name) ; $j++)
+					{
+						$columnMenu[$j] = columnBuild($menu_name[$j],$menu_image[$j],$menu_description[$j],uriAction('สั่งซื้อ','https://www.youtube.com/'));
+					}
+					pushMessage($userID,carouselBuild($columnMenu),$access_token);
+				}
 			}
 			else if ($getText=='ดูข้อมูลร้านค้า')
 			{
@@ -146,14 +164,34 @@ if (!is_null($events['events']))
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
-				$result = $connention->prepare("SELECT * FROM customer WHERE line_id = :line_id");
-				$result->bindParam(':line_id',$userID,PDO::FETCH_ASSOC);
-				$result->execute();
-				$ob = $result->fetchObject();
-				if($ob->u_status==1) $u_status = 'ปกติ';
-				else if ($ob->u_status==0) $u_status = 'ถูกระงับการใช้งาน';
-				$textResult = 'ชื่อ : '.$ob->u_name.'   นามสกุล : '.$ob->u_lastname.'   เบอร์โทรศัพท์ : '.$ob->u_tel.'   สถานะผู้ใช้ : '.$u_status;
-				pushMessage($userID,textBuild($textResult),$access_token);
+				$result = $connention->prepare("SELECT * FROM customer");
+				$text = $result->execute();
+				$user_check = false;
+				while($rs = $result->fetch())
+				{
+					if($userID==$rs['line_id'])
+					{
+						$user_check = true;
+					}
+				}
+				if(!$user_check)
+				{
+					$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
+					pushMessage($userID,confirmBuild($con_title,messageAction('สม้ครสมาชิก','สม้ครสมาชิก'),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
+				}
+				if($user_check)
+				{
+					$result = $connention->prepare("SELECT * FROM customer WHERE line_id = :line_id");
+					$result->bindParam(':line_id',$userID,PDO::FETCH_ASSOC);
+					$result->execute();
+					$ob = $result->fetchObject();
+					if($ob->u_status==1) $u_status = 'ปกติ';
+					else if ($ob->u_status==0) $u_status = 'ถูกระงับการใช้งาน';
+					$textResult = 'ชื่อ : '.$ob->u_name.'   นามสกุล : '.$ob->u_lastname.'   เบอร์โทรศัพท์ : '.$ob->u_tel.'   สถานะผู้ใช้ : '.$u_status;
+					pushMessage($userID,textBuild($textResult),$access_token);
+					pushMessage($userID,confirmBuild ('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่',messageAction('ต้องการ','ฉันต้องการแก้ไขข้อมูล'),messageAction('ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล')),$access_token);
+				}
+
 				// pushMessage($userID,textBuild('eiei'),$access_token);
 				// pushMessage($userID,textBuild('มันไม่เป็นNULLเว้ย'),$access_token);
 				// pushMessage($userID,textBuild($rs['line_id']),$access_token);
@@ -161,13 +199,31 @@ if (!is_null($events['events']))
         //
 				// pushMessage($userID,textBuild('ข้อมูลของคุณคือ'),$access_token);
 				 // pushMessage($userID,confirmBuild('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่','ต้องการ','ฉันต้องการแก้ไขข้อมูล','ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล'),$access_token);
-				 pushMessage($userID,confirmBuild ('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่',messageAction('ต้องการ','ฉันต้องการแก้ไขข้อมูล'),messageAction('ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล')),$access_token);
+
 			}
 			else if ($getText=='ฉันต้องการแก้ไขข้อมูล')
 			{
-				pushMessage($userID,textBuild('หากคุณต้องการแก้ไขข้อมูลส่วนตัวของคุณ กรุณาพิมพ์ตามรูปแบบการแก้ไขดังนี้'),$access_token);
-        pushMessage($userID,textBuild('แก้ไข,สิ่งที่คุณต้องการแก้ไข,ข้อมูลที่แก้ไขแล้ว เช่น คุณต้องการแก้ไขเบอร์โทรศัพท์ จะต้องพิมพ์ดังนี้ แก้ไข,เบอร์์,0812345678 เป็นต้น'),$access_token);
-				pushMessage($userID,textBuild('ข้อมูลที่ท่านสามารถแก้ไขได้มีดังนี้ ชื่อ,นามสกุล,เบอร์,บ้านเลขที่,ซอย,หมู่บ้าน,แขวง,อำเภอ,จังหวัด,รหัสไปรษณีย์,ข้อมูลอื่นๆ'),$access_token);
+				$result = $connention->prepare("SELECT * FROM customer");
+				$text = $result->execute();
+				$user_check = false;
+				while($rs = $result->fetch())
+				{
+					if($userID==$rs['line_id'])
+					{
+						$user_check = true;
+					}
+				}
+				if(!$user_check)
+				{
+					$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
+					pushMessage($userID,confirmBuild($con_title,messageAction('สม้ครสมาชิก','สม้ครสมาชิก'),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
+				}
+				if($user_check)
+				{
+					pushMessage($userID,textBuild('หากคุณต้องการแก้ไขข้อมูลส่วนตัวของคุณ กรุณาพิมพ์ตามรูปแบบการแก้ไขดังนี้'),$access_token);
+	        pushMessage($userID,textBuild('แก้ไข,สิ่งที่คุณต้องการแก้ไข,ข้อมูลที่แก้ไขแล้ว เช่น คุณต้องการแก้ไขเบอร์โทรศัพท์ จะต้องพิมพ์ดังนี้ แก้ไข,เบอร์์,0812345678 เป็นต้น'),$access_token);
+					pushMessage($userID,textBuild('ข้อมูลที่ท่านสามารถแก้ไขได้มีดังนี้ ชื่อ,นามสกุล,เบอร์,บ้านเลขที่,ซอย,หมู่บ้าน,แขวง,อำเภอ,จังหวัด,รหัสไปรษณีย์,ข้อมูลอื่นๆ'),$access_token);
+				}
 			}
 			else if (strpos($getText,'แก้ไข,ชื่อ')!==false)
 			{
