@@ -1,10 +1,12 @@
 <?php
 //Connect DB
-$host = 'ec2-54-221-254-72.compute-1.amazonaws.com';
-$dbname = 'de6sfosesim5hp';
-$user = 'sicngsjfdewwql';
-$pass = 'b5cf4b4612c0625c4e9ce261c84939a5bb33bf66dd5a95cd12b5fc1792019b6d';
-$connention = new PDO("pgsql:host=$host;dbname=$dbname", $user, $pass);
+// $host = 'ec2-54-221-254-72.compute-1.amazonaws.com';
+// $dbname = 'de6sfosesim5hp';
+// $user = 'sicngsjfdewwql';
+// $pass = 'b5cf4b4612c0625c4e9ce261c84939a5bb33bf66dd5a95cd12b5fc1792019b6d';
+// $connention = new PDO("pgsql:host=$host;dbname=$dbname", $user, $pass);
+$connention = new PDO("sqlsrv:server = tcp:preprojectlinebot.database.windows.net,1433; Database = linebotDB", "supanun", "l64koyoBABE");
+$connention->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 //Connect Line MessagingDPI
 $access_token = 's/m2qnXnrLyOpbmE+aJ71nNBy1k2ZBJQaoBZN6e26iDAVdZ+BS510Z4fX6Wa8e9q72LLyTfQ3mrRhW3Y4Llr/SJ8J57kt5STaOI7uXzgqFYTpgLqPFVRLKRjsSmPfw93P/OhsfIjqlyUJTL007RLXgdB04t89/1O/w1cDnyilFU=';
 // Get POST body content
