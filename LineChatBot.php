@@ -1,10 +1,12 @@
 <?php
-//Connect DB
+//Connect PostageDB
 // $host = 'ec2-54-221-254-72.compute-1.amazonaws.com';
 // $dbname = 'de6sfosesim5hp';
 // $user = 'sicngsjfdewwql';
 // $pass = 'b5cf4b4612c0625c4e9ce261c84939a5bb33bf66dd5a95cd12b5fc1792019b6d';
 // $connention = new PDO("pgsql:host=$host;dbname=$dbname", $user, $pass);
+
+//Connect Azure DB
 $connention = new PDO("sqlsrv:server = tcp:preprojectlinebot.database.windows.net,1433; Database = linebotDB", "supanun", "l64koyoBABE");
 $connention->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 //Connect Line MessagingDPI
@@ -159,7 +161,7 @@ if (!is_null($events['events']))
 				$imageOrigi ='https://scontent-kut2-1.xx.fbcdn.net/v/t1.0-9/22814405_1701979389873235_1671810247852454191_n.jpg?oh=53a9387cb9c73b3ccf62a3534d62e6b0&oe=5A782E36';
 				$imagePreview ='https://scontent-kut2-1.xx.fbcdn.net/v/t1.0-9/22814405_1701979389873235_1671810247852454191_n.jpg?oh=53a9387cb9c73b3ccf62a3534d62e6b0&oe=5A782E36';
 				pushMessage($userID,imageBuild($imageOrigi,$imagePreview),$access_token);
-				pushMessage($userID,textBuild('ขนมข้าวตังเสวยเป็นขนมโบราณหากินได้อยาก มีรสชาติแสนอร่อย ด้วยสูตรลับของท่านร้านทำมให้ขนมมีความกรอบ หอมหวาน กลมกล่อม นึกถึงขนมข้าวตังเสวยต้องนึกถึงร้านเมณีเท่านั้น!'),$access_token);
+				pushMessage($userID,textBuild('ขนมข้าวตังเสวยเป็นขนมโบราณหากินได้อยาก มีรสชาติแสนอร่อย ด้วยสูตรลับของท่านร้านทำให้ขนมมีความกรอบ หอมหวาน กลมกล่อม นึกถึงขนมข้าวตังเสวยต้องนึกถึงร้านเมณีเท่านั้น!'),$access_token);
 				pushMessage($userID,textBuild('ท่านสามารถติดต่อทางร้านได้โดยช่องทางดังนี้'),$access_token);
 				pushMessage($userID,locationBuild(),$access_token);
         pushMessage($userID,textBuild('เบอรโทรศัพท์ 0817349462 และ 0818178962'),$access_token);
@@ -223,13 +225,37 @@ if (!is_null($events['events']))
 				if($user_check)
 				{
 					pushMessage($userID,textBuild('หากคุณต้องการแก้ไขข้อมูลส่วนตัวของคุณ กรุณาพิมพ์ตามรูปแบบการแก้ไขดังนี้'),$access_token);
-	        pushMessage($userID,textBuild('แก้ไข,สิ่งที่คุณต้องการแก้ไข,ข้อมูลที่แก้ไขแล้ว เช่น คุณต้องการแก้ไขเบอร์โทรศัพท์ จะต้องพิมพ์ดังนี้ แก้ไข,เบอร์์,0812345678 เป็นต้น'),$access_token);
+	        pushMessage($userID,textBuild('แก้ไข,สิ่งที่คุณต้องการแก้ไข,ข้อมูลที่แก้ไขแล้ว เช่น คุณต้องการแก้ไขเบอร์โทรศัพท์ จะต้องพิมพ์ดังนี้ แก้ไข,เบอร์,0812345678 เป็นต้น'),$access_token);
 					pushMessage($userID,textBuild('ข้อมูลที่ท่านสามารถแก้ไขได้มีดังนี้ ชื่อ,นามสกุล,เบอร์,บ้านเลขที่,ซอย,หมู่บ้าน,แขวง,อำเภอ,จังหวัด,รหัสไปรษณีย์,ข้อมูลอื่นๆ'),$access_token);
 				}
 			}
 			else if (strpos($getText,'แก้ไข,ชื่อ')!==false)
 			{
-				pushMessage($userID,textBuild('ระบบได้แก้ไขข้อมูลของคุณเรียบร้อยแล้ว'),$access_token);
+				$text = str_replace('แก้ไข','',$getText);
+				$register = explode(',',$text);
+				$result = $connention->prepare("SELECT * FROM customer");
+				$text = $result->execute();
+				$user_check = false;
+				while($rs = $result->fetch())
+				{
+					if($userID==$rs['line_id'])
+					{
+						$user_check = true;
+					}
+				}
+				if(!$user_check)
+				{
+					$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
+					pushMessage($userID,confirmBuild($con_title,messageAction('สม้ครสมาชิก','สม้ครสมาชิก'),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
+				}
+				if($user_check)
+				{
+					$statement = $connention->prepare('UPDATE customer SET u_name=:u_name WHERE line_id=:line_id');
+					$statement->execute(array(
+						'u_name' => $register[2],
+						'line_id' => $userID
+					));
+				}
 			}
 		}
     if ($event['type'] == 'message' && $event['message']['type'] == 'sticker')
