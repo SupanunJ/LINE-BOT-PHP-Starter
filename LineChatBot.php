@@ -131,7 +131,7 @@ if (!is_null($events['events']))
 				if(!$user_check)
 				{
 					$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
-					pushMessage($userID,confirmBuild($con_title,uriAction('สม้ครสมาชิก','https://www.youtube.com/'),messageAction('ไม่ต้องการ','ไม่ต้องการ')),$access_token);
+					pushMessage($userID,confirmBuild($con_title,uriAction('สมัครสมาชิก','http://webforlinechat.azurewebsites.net//Regis/Index/'),messageAction('ไม่ต้องการ','ไม่ต้องการ')),$access_token);
 				}
 				if($user_check)
 				{
@@ -181,7 +181,7 @@ if (!is_null($events['events']))
 				if(!$user_check)
 				{
 					$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
-					pushMessage($userID,confirmBuild($con_title,messageAction('สม้ครสมาชิก','สม้ครสมาชิก'),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
+					pushMessage($userID,confirmBuild($con_title,uriAction('สมัครสมาชิก','http://webforlinechat.azurewebsites.net//Regis/Index/'),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
 				}
 				if($user_check)
 				{
@@ -220,7 +220,7 @@ if (!is_null($events['events']))
 				if(!$user_check)
 				{
 					$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
-					pushMessage($userID,confirmBuild($con_title,messageAction('สม้ครสมาชิก','สม้ครสมาชิก'),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
+					pushMessage($userID,confirmBuild($con_title,uriAction('สมัครสมาชิก','http://webforlinechat.azurewebsites.net//Regis/Index/'),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
 				}
 				if($user_check)
 				{
@@ -246,7 +246,7 @@ if (!is_null($events['events']))
 				if(!$user_check)
 				{
 					$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
-					pushMessage($userID,confirmBuild($con_title,messageAction('สม้ครสมาชิก','สม้ครสมาชิก'),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
+					pushMessage($userID,confirmBuild($con_title,uriAction('สมัครสมาชิก','http://webforlinechat.azurewebsites.net//Regis/Index/'),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
 				}
 				if($user_check)
 				{
