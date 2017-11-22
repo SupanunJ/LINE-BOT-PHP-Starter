@@ -151,7 +151,7 @@ if (!is_null($events['events']))
 					$columnMenu;
 					for ($j=0; $j < count($menu_name) ; $j++)
 					{
-						$columnMenu[$j] = columnBuild($menu_name[$j],$menu_image[$j],$menu_description[$j],uriAction('สั่งซื้อ','https://www.youtube.com/'));
+						$columnMenu[$j] = columnBuild($menu_name[$j],$menu_image[$j],$menu_description[$j],uriAction('สั่งซื้อ','http://webforlinechat.azurewebsites.net/Product/ShopProduct'));
 					}
 					pushMessage($userID,carouselBuild($columnMenu),$access_token);
 				}
@@ -192,7 +192,9 @@ if (!is_null($events['events']))
 					if($ob->u_status==1) $u_status = 'ปกติ';
 					else if ($ob->u_status==0) $u_status = 'ถูกระงับการใช้งาน';
 					$textResult = 'ชื่อ : '.$ob->u_name.'   นามสกุล : '.$ob->u_lastname.'   เบอร์โทรศัพท์ : '.$ob->u_tel.'   สถานะผู้ใช้ : '.$u_status;
+					$textResult2 = 'บ้านเลขที่ : '.$ob->house_no.'   หมู่บ้าน : '.$ob->village.'   ซอย : '.$ob->lane.'   ถนน : '.$ob->road.'   ตำบล : '.$ob->subarea.'   อำเภอ : '.$ob->area.'   จังหวัด : '.$ob->prpvince.'   รหัสไปรษณีย์ : '.$ob->postal_code;
 					pushMessage($userID,textBuild($textResult),$access_token);
+					pushMessage($userID,textBuild($textResult2),$access_token);
 					pushMessage($userID,confirmBuild ('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่',messageAction('ต้องการ','ฉันต้องการแก้ไขข้อมูล'),messageAction('ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล')),$access_token);
 				}
 
