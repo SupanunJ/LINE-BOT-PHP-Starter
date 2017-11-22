@@ -259,6 +259,62 @@ if (!is_null($events['events']))
 					));
 				}
 			}
+			else if (strpos($getText,'แก้ไข,นามสกุล')!==false)
+			{
+				$text = str_replace('แก้ไข','',$getText);
+				$register = explode(',',$text);
+				$result = $connention->prepare("SELECT * FROM customer");
+				$text = $result->execute();
+				$user_check = false;
+				while($rs = $result->fetch())
+				{
+					if($userID==$rs['line_id'])
+					{
+						$user_check = true;
+					}
+				}
+				if(!$user_check)
+				{
+					$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
+					pushMessage($userID,confirmBuild($con_title,uriAction('สมัครสมาชิก','http://webforlinechat.azurewebsites.net//Regis/Index/'.$userID),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
+				}
+				if($user_check)
+				{
+					$statement = $connention->prepare('UPDATE customer SET u_lastname=:u_lastname WHERE line_id=:line_id');
+					$statement->execute(array(
+						'u_lastname' => $register[2],
+						'line_id' => $userID
+					));
+				}
+			}
+		}
+		else if (strpos($getText,'แก้ไข,เบอร์โทรศัพท์')!==false)
+		{
+			$text = str_replace('แก้ไข','',$getText);
+			$register = explode(',',$text);
+			$result = $connention->prepare("SELECT * FROM customer");
+			$text = $result->execute();
+			$user_check = false;
+			while($rs = $result->fetch())
+			{
+				if($userID==$rs['line_id'])
+				{
+					$user_check = true;
+				}
+			}
+			if(!$user_check)
+			{
+				$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
+				pushMessage($userID,confirmBuild($con_title,uriAction('สมัครสมาชิก','http://webforlinechat.azurewebsites.net//Regis/Index/'.$userID),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
+			}
+			if($user_check)
+			{
+				$statement = $connention->prepare('UPDATE customer SET u_tel=:u_tel WHERE line_id=:line_id');
+				$statement->execute(array(
+					'u_tel' => $register[2],
+					'line_id' => $userID
+				));
+			}
 		}
     if ($event['type'] == 'message' && $event['message']['type'] == 'sticker')
     {
