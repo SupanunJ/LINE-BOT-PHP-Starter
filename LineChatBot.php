@@ -356,7 +356,7 @@ function stickerBuild()
   $messages = [
       'type' => 'sticker',
       'packageId' => '1',
-      'stickerId' => '1'
+      'stickerId' => rand(1,10)
   ];
   return $messages;
 }
