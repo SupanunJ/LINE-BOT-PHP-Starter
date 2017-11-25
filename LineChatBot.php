@@ -151,7 +151,7 @@ if (!is_null($events['events']))
 					$columnMenu;
 					for ($j=0; $j < count($menu_name) ; $j++)
 					{
-						$columnMenu[$j] = columnBuild($menu_name[$j],$menu_image[$j],$menu_description[$j],uriAction('สั่งซื้อ','http://webforlinechat.azurewebsites.net/Product/ShopProduct'));
+						$columnMenu[$j] = columnBuild($menu_name[$j],$menu_image[$j],$menu_description[$j],uriAction('สั่งซื้อ','http://webforlinechat.azurewebsites.net/Product/ShopProduct/'.$userID));
 					}
 					pushMessage($userID,carouselBuild($columnMenu),$access_token);
 				}
