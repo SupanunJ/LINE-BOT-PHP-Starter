@@ -187,7 +187,7 @@ if (!is_null($events['events']))
 				// 	}
 				// 	pushMessage($userID,textBuild($text),$access_token);
 				// }
-				$ob = $result->fetchObject();
+				$ob = $result->fetchAll();
 				pushMessage($userID,textBuild($ob->rowCount()),$access_token);
 
 			}
