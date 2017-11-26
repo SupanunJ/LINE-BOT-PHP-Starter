@@ -195,7 +195,7 @@ if (!is_null($events['events']))
 					if($ob->u_status==1) $u_status = 'ปกติ';
 					else if ($ob->u_status==0) $u_status = 'ถูกระงับการใช้งาน';
 					$textResult = 'ชื่อ : '.$ob->u_name.'   นามสกุล : '.$ob->u_lastname.'   เบอร์โทรศัพท์ : '.$ob->u_tel.'   สถานะผู้ใช้ : '.$u_status;
-					$textResult2 = 'บ้านเลขที่ : '.$ob->house_no.'   หมู่บ้าน : '.$ob->village.'   ซอย : '.$ob->lane.'   ถนน : '.$ob->road.'   ตำบล : '.$ob->subarea.'   อำเภอ : '.$ob->area.'   จังหวัด : '.$ob->prpvince.'   รหัสไปรษณีย์ : '.$ob->postal_code;
+					$textResult2 = 'บ้านเลขที่ : '.$ob->house_no.'   หมู่บ้าน : '.$ob->village.'   ซอย : '.$ob->lane.'   ถนน : '.$ob->road.'   ตำบล : '.$ob->subarea.'   อำเภอ : '.$ob->area.'   จังหวัด : '.$ob->province.'   รหัสไปรษณีย์ : '.$ob->postal_code;
 					$textResult3 = 'หมายเหตุ : '.$ob->annotation;
 					pushMessage($userID,textBuild($textResult),$access_token);
 					pushMessage($userID,textBuild($textResult2),$access_token);
