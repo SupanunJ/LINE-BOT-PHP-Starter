@@ -173,7 +173,7 @@ if (!is_null($events['events']))
 				{
 					// if($ob.['o_status'] == 0)
 					// {
-						$text1 = 'รหัสออเดอร์ : '.$rs['o_id'].'   วันที่ : '.$rs['o_date'].'   สถานะออเดอร์ : ยังไม่โอน   ราคา : '.$rs['total_price'];
+						// $text1 = 'รหัสออเดอร์ : '.$rs['o_id'].'   วันที่ : '.$rs['o_date'].'   สถานะออเดอร์ : ยังไม่โอน   ราคา : '.$rs['total_price'];
 					// }
 					// else if ($ob.['o_status'] == 1)
 					// {
@@ -183,7 +183,7 @@ if (!is_null($events['events']))
 					// {
 					// 	$text += 'รหัสออเดอร์ : '.$ob['o_id'].'   วันที่ : '.$ob['o_date'].'   สถานะออเดอร์ : กำลังจัดส่ง   ราคา : '.$ob['total_price'];
 					// }
-					pushMessage($userID,textBuild($text1),$access_token);
+					pushMessage($userID,textBuild('$text1'),$access_token);
 				}
 
 
