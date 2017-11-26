@@ -145,7 +145,7 @@ if (!is_null($events['events']))
 					{
 						$menu_name[$i] = $rs['p_name'];
 						$menu_description[$i] = $rs['p_description'];
-						$menu_image[$i] = $rs['p_image'];
+						$menu_image[$i] = 'http://preproject2mvc20171126124543.azurewebsites.net/BG/'.$rs['p_image'];
 						$i++;
 					}
 					$columnMenu;
