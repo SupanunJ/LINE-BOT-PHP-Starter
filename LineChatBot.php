@@ -166,6 +166,9 @@ if (!is_null($events['events']))
 				pushMessage($userID,locationBuild(),$access_token);
         pushMessage($userID,textBuild('เบอรโทรศัพท์ 0817349462 และ 0818178962'),$access_token);
 			}
+			else if ($getText=='ตรวจสอบสถานะออเดอร์') {
+				pushMessage($userID,textBuild('บริการนี้ยังไม่เปิดใช้บริการ'),$access_token);
+			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
 				$result = $connention->prepare("SELECT * FROM customer");
@@ -193,8 +196,10 @@ if (!is_null($events['events']))
 					else if ($ob->u_status==0) $u_status = 'ถูกระงับการใช้งาน';
 					$textResult = 'ชื่อ : '.$ob->u_name.'   นามสกุล : '.$ob->u_lastname.'   เบอร์โทรศัพท์ : '.$ob->u_tel.'   สถานะผู้ใช้ : '.$u_status;
 					$textResult2 = 'บ้านเลขที่ : '.$ob->house_no.'   หมู่บ้าน : '.$ob->village.'   ซอย : '.$ob->lane.'   ถนน : '.$ob->road.'   ตำบล : '.$ob->subarea.'   อำเภอ : '.$ob->area.'   จังหวัด : '.$ob->prpvince.'   รหัสไปรษณีย์ : '.$ob->postal_code;
+					$textResult3 = 'หมายเหตุ : '.$ob->annotation;
 					pushMessage($userID,textBuild($textResult),$access_token);
 					pushMessage($userID,textBuild($textResult2),$access_token);
+					pushMessage($userID,textBuild($textResult3),$access_token);
 					pushMessage($userID,confirmBuild ('คุณต้องการแก้ไขข้อมูลส่วนตัวของคุณหรือไม่',messageAction('ต้องการ','ฉันต้องการแก้ไขข้อมูล'),messageAction('ไม่ต้องการ','ฉันไม่ต้องการแก้ไขข้อมูล')),$access_token);
 				}
 
@@ -312,6 +317,258 @@ if (!is_null($events['events']))
 				$statement = $connention->prepare('UPDATE customer SET u_tel=:u_tel WHERE line_id=:line_id');
 				$statement->execute(array(
 					'u_tel' => $register[2],
+					'line_id' => $userID
+				));
+			}
+		}
+		else if (strpos($getText,'แก้ไข,บ้านเลขที่')!==false)
+		{
+			$text = str_replace('แก้ไข','',$getText);
+			$register = explode(',',$text);
+			$result = $connention->prepare("SELECT * FROM customer");
+			$text = $result->execute();
+			$user_check = false;
+			while($rs = $result->fetch())
+			{
+				if($userID==$rs['line_id'])
+				{
+					$user_check = true;
+				}
+			}
+			if(!$user_check)
+			{
+				$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
+				pushMessage($userID,confirmBuild($con_title,uriAction('สมัครสมาชิก','http://webforlinechat.azurewebsites.net//Regis/Index/'.$userID),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
+			}
+			if($user_check)
+			{
+				$statement = $connention->prepare('UPDATE customer SET house_no=:house_no WHERE line_id=:line_id');
+				$statement->execute(array(
+					'house_no' => $register[2],
+					'line_id' => $userID
+				));
+			}
+		}
+		else if (strpos($getText,'แก้ไข,หมู่บ้าน')!==false)
+		{
+			$text = str_replace('แก้ไข','',$getText);
+			$register = explode(',',$text);
+			$result = $connention->prepare("SELECT * FROM customer");
+			$text = $result->execute();
+			$user_check = false;
+			while($rs = $result->fetch())
+			{
+				if($userID==$rs['line_id'])
+				{
+					$user_check = true;
+				}
+			}
+			if(!$user_check)
+			{
+				$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
+				pushMessage($userID,confirmBuild($con_title,uriAction('สมัครสมาชิก','http://webforlinechat.azurewebsites.net//Regis/Index/'.$userID),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
+			}
+			if($user_check)
+			{
+				$statement = $connention->prepare('UPDATE customer SET village=:village WHERE line_id=:line_id');
+				$statement->execute(array(
+					'village' => $register[2],
+					'line_id' => $userID
+				));
+			}
+		}
+		else if (strpos($getText,'แก้ไข,ซอย')!==false)
+		{
+			$text = str_replace('แก้ไข','',$getText);
+			$register = explode(',',$text);
+			$result = $connention->prepare("SELECT * FROM customer");
+			$text = $result->execute();
+			$user_check = false;
+			while($rs = $result->fetch())
+			{
+				if($userID==$rs['line_id'])
+				{
+					$user_check = true;
+				}
+			}
+			if(!$user_check)
+			{
+				$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
+				pushMessage($userID,confirmBuild($con_title,uriAction('สมัครสมาชิก','http://webforlinechat.azurewebsites.net//Regis/Index/'.$userID),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
+			}
+			if($user_check)
+			{
+				$statement = $connention->prepare('UPDATE customer SET lane=:lane WHERE line_id=:line_id');
+				$statement->execute(array(
+					'lane' => $register[2],
+					'line_id' => $userID
+				));
+			}
+		}
+		else if (strpos($getText,'แก้ไข,ถนน')!==false)
+		{
+			$text = str_replace('แก้ไข','',$getText);
+			$register = explode(',',$text);
+			$result = $connention->prepare("SELECT * FROM customer");
+			$text = $result->execute();
+			$user_check = false;
+			while($rs = $result->fetch())
+			{
+				if($userID==$rs['line_id'])
+				{
+					$user_check = true;
+				}
+			}
+			if(!$user_check)
+			{
+				$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
+				pushMessage($userID,confirmBuild($con_title,uriAction('สมัครสมาชิก','http://webforlinechat.azurewebsites.net//Regis/Index/'.$userID),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
+			}
+			if($user_check)
+			{
+				$statement = $connention->prepare('UPDATE customer SET road=:road WHERE line_id=:line_id');
+				$statement->execute(array(
+					'road' => $register[2],
+					'line_id' => $userID
+				));
+			}
+		}
+		else if (strpos($getText,'แก้ไข,ตำบล')!==false)
+		{
+			$text = str_replace('แก้ไข','',$getText);
+			$register = explode(',',$text);
+			$result = $connention->prepare("SELECT * FROM customer");
+			$text = $result->execute();
+			$user_check = false;
+			while($rs = $result->fetch())
+			{
+				if($userID==$rs['line_id'])
+				{
+					$user_check = true;
+				}
+			}
+			if(!$user_check)
+			{
+				$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
+				pushMessage($userID,confirmBuild($con_title,uriAction('สมัครสมาชิก','http://webforlinechat.azurewebsites.net//Regis/Index/'.$userID),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
+			}
+			if($user_check)
+			{
+				$statement = $connention->prepare('UPDATE customer SET subarea=:subarea WHERE line_id=:line_id');
+				$statement->execute(array(
+					'subarea' => $register[2],
+					'line_id' => $userID
+				));
+			}
+		}
+		else if (strpos($getText,'แก้ไข,อำเภอ')!==false)
+		{
+			$text = str_replace('แก้ไข','',$getText);
+			$register = explode(',',$text);
+			$result = $connention->prepare("SELECT * FROM customer");
+			$text = $result->execute();
+			$user_check = false;
+			while($rs = $result->fetch())
+			{
+				if($userID==$rs['line_id'])
+				{
+					$user_check = true;
+				}
+			}
+			if(!$user_check)
+			{
+				$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
+				pushMessage($userID,confirmBuild($con_title,uriAction('สมัครสมาชิก','http://webforlinechat.azurewebsites.net//Regis/Index/'.$userID),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
+			}
+			if($user_check)
+			{
+				$statement = $connention->prepare('UPDATE customer SET area=:area WHERE line_id=:line_id');
+				$statement->execute(array(
+					'area' => $register[2],
+					'line_id' => $userID
+				));
+			}
+		}
+		else if (strpos($getText,'แก้ไข,จังหวัด')!==false)
+		{
+			$text = str_replace('แก้ไข','',$getText);
+			$register = explode(',',$text);
+			$result = $connention->prepare("SELECT * FROM customer");
+			$text = $result->execute();
+			$user_check = false;
+			while($rs = $result->fetch())
+			{
+				if($userID==$rs['line_id'])
+				{
+					$user_check = true;
+				}
+			}
+			if(!$user_check)
+			{
+				$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
+				pushMessage($userID,confirmBuild($con_title,uriAction('สมัครสมาชิก','http://webforlinechat.azurewebsites.net//Regis/Index/'.$userID),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
+			}
+			if($user_check)
+			{
+				$statement = $connention->prepare('UPDATE customer SET province=:province WHERE line_id=:line_id');
+				$statement->execute(array(
+					'province' => $register[2],
+					'line_id' => $userID
+				));
+			}
+		}
+		else if (strpos($getText,'แก้ไข,รหัสไปรษนีย์')!==false)
+		{
+			$text = str_replace('แก้ไข','',$getText);
+			$register = explode(',',$text);
+			$result = $connention->prepare("SELECT * FROM customer");
+			$text = $result->execute();
+			$user_check = false;
+			while($rs = $result->fetch())
+			{
+				if($userID==$rs['line_id'])
+				{
+					$user_check = true;
+				}
+			}
+			if(!$user_check)
+			{
+				$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
+				pushMessage($userID,confirmBuild($con_title,uriAction('สมัครสมาชิก','http://webforlinechat.azurewebsites.net//Regis/Index/'.$userID),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
+			}
+			if($user_check)
+			{
+				$statement = $connention->prepare('UPDATE customer SET postal_code=:postal_code WHERE line_id=:line_id');
+				$statement->execute(array(
+					'postal_code' => $register[2],
+					'line_id' => $userID
+				));
+			}
+		}
+		else if (strpos($getText,'แก้ไข,หมายเหตุ')!==false)
+		{
+			$text = str_replace('แก้ไข','',$getText);
+			$register = explode(',',$text);
+			$result = $connention->prepare("SELECT * FROM customer");
+			$text = $result->execute();
+			$user_check = false;
+			while($rs = $result->fetch())
+			{
+				if($userID==$rs['line_id'])
+				{
+					$user_check = true;
+				}
+			}
+			if(!$user_check)
+			{
+				$con_title = 'คุณไม่สามารถใช้บริการนี้ได้ กรุณาสมัครสมาชิก';
+				pushMessage($userID,confirmBuild($con_title,uriAction('สมัครสมาชิก','http://webforlinechat.azurewebsites.net//Regis/Index/'.$userID),messageAction('ไม่ต้องการสมัคร','ไม่ต้องการสมัคร')),$access_token);
+			}
+			if($user_check)
+			{
+				$statement = $connention->prepare('UPDATE customer SET annotation=:annotation WHERE line_id=:line_id');
+				$statement->execute(array(
+					'annotation' => $register[2],
 					'line_id' => $userID
 				));
 			}
