@@ -171,7 +171,7 @@ if (!is_null($events['events']))
 				$result->bindParam(':line_id',$userID,PDO::FETCH_ASSOC);
 				$result->execute();
 				$text = '';
-				while ($ob = $result->fetchObject())
+				while ($ob = $result->fetch())
 				{
 					if($ob.['o_status'] == 0)
 					{
