@@ -166,28 +166,10 @@ if (!is_null($events['events']))
 				pushMessage($userID,locationBuild(),$access_token);
         pushMessage($userID,textBuild('เบอรโทรศัพท์ 0817349462 และ 0818178962'),$access_token);
 			}
-			else if ($getText=='ตรวจสอบสถานะออเดอร์') {
-				$result = $connention-prepare("SELECT * FROM order_list");
-				$text = $result->execute();
-				while ($rs = $result->fetch())
-				{
-					// if($ob.['o_status'] == 0)
-					// {
-						// $text1 = 'รหัสออเดอร์ : '.$rs['o_id'].'   วันที่ : '.$rs['o_date'].'   สถานะออเดอร์ : ยังไม่โอน   ราคา : '.$rs['total_price'];
-					// }
-					// else if ($ob.['o_status'] == 1)
-					// {
-					// 	$text += 'รหัสออเดอร์ : '.$ob['o_id'].'   วันที่ : '.$ob['o_date'].'   สถานะออเดอร์ : โอนแล้ว   ราคา : '.$ob['total_price'];
-					// }
-					// else if ($ob.['o_status'] == 2)
-					// {
-					// 	$text += 'รหัสออเดอร์ : '.$ob['o_id'].'   วันที่ : '.$ob['o_date'].'   สถานะออเดอร์ : กำลังจัดส่ง   ราคา : '.$ob['total_price'];
-					// }
-					pushMessage($userID,textBuild('$text1'),$access_token);
-				}
-
-
-
+			else if ($getText=='ตรวจสอบสถานะออเดอร์')
+			{
+				$con_title = 'คุณต้องการตรวจสอบสถานะออเดอร์ได้หรือไม่';
+				pushMessage($userID,confirmBuild($con_title,uriAction('ต้องการ','http://webforlinechat.azurewebsites.net//CheckOrder/Check/'.$userID),messageAction('ไม่ต้องการ','ไม่ต้องการ')),$access_token);
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
