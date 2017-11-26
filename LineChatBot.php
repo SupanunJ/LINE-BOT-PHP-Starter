@@ -187,7 +187,8 @@ if (!is_null($events['events']))
 				// 	}
 				// 	pushMessage($userID,textBuild($text),$access_token);
 				// }
-				pushMessage($userID,textBuild($result->rowCount()),$access_token);
+				$ob = $result->fetchObject();
+				pushMessage($userID,textBuild($ob->rowCount()),$access_token);
 
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
