@@ -167,7 +167,27 @@ if (!is_null($events['events']))
         pushMessage($userID,textBuild('เบอรโทรศัพท์ 0817349462 และ 0818178962'),$access_token);
 			}
 			else if ($getText=='ตรวจสอบสถานะออเดอร์') {
-				pushMessage($userID,textBuild('บริการนี้ยังไม่เปิดใช้บริการ'),$access_token);
+				$result = $connention-prepare("SELECT * FROM order_list WHERE line_id=:line_id");
+				$result->bindParam(':line_id',$userID,PDO::FETCH_ASSOC);
+				$result->execute();
+				$text = '';
+				while ($ob = $result->fetchObject())
+				{
+					if($ob.['o_status'] == 0)
+					{
+						$text += 'รหัสออเดอร์ : '.$ob['o_id'].'   วันที่ : '.$ob['o_date'].'   สถานะออเดอร์ : ยังไม่โอน   ราคา : '.$ob['total_price'];
+					}
+					else if ($ob.['o_status'] == 1)
+					{
+						$text += 'รหัสออเดอร์ : '.$ob['o_id'].'   วันที่ : '.$ob['o_date'].'   สถานะออเดอร์ : โอนแล้ว   ราคา : '.$ob['total_price'];
+					}
+					else if ($ob.['o_status'] == 2)
+					{
+						$text += 'รหัสออเดอร์ : '.$ob['o_id'].'   วันที่ : '.$ob['o_date'].'   สถานะออเดอร์ : กำลังจัดส่ง   ราคา : '.$ob['total_price'];
+					}
+					pushMessage($userID,textBuild($text),$access_token);
+				}
+
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
