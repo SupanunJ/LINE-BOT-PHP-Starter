@@ -168,14 +168,12 @@ if (!is_null($events['events']))
 			}
 			else if ($getText=='ตรวจสอบสถานะออเดอร์') {
 				$result = $connention-prepare("SELECT * FROM order_list");
-
-				$result->execute();
-				$text = '';
-				while ($ob = $result->fetch())
+				$text = $result->execute();
+				while ($rs = $result->fetch())
 				{
 					// if($ob.['o_status'] == 0)
 					// {
-						$text = 'รหัสออเดอร์ : '.$ob['o_id'].'   วันที่ : '.$ob['o_date'].'   สถานะออเดอร์ : ยังไม่โอน   ราคา : '.$ob['total_price'];
+						$text1 = 'รหัสออเดอร์ : '.$rs['o_id'].'   วันที่ : '.$rs['o_date'].'   สถานะออเดอร์ : ยังไม่โอน   ราคา : '.$rs['total_price'];
 					// }
 					// else if ($ob.['o_status'] == 1)
 					// {
@@ -185,7 +183,7 @@ if (!is_null($events['events']))
 					// {
 					// 	$text += 'รหัสออเดอร์ : '.$ob['o_id'].'   วันที่ : '.$ob['o_date'].'   สถานะออเดอร์ : กำลังจัดส่ง   ราคา : '.$ob['total_price'];
 					// }
-					pushMessage($userID,textBuild($text),$access_token);
+					pushMessage($userID,textBuild($text1),$access_token);
 				}
 
 
