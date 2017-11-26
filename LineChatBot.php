@@ -173,19 +173,20 @@ if (!is_null($events['events']))
 				$text = '';
 				while ($ob = $result->fetch())
 				{
-					if($ob.['o_status'] == 0)
-					{
-						$text += 'รหัสออเดอร์ : '.$ob['o_id'].'   วันที่ : '.$ob['o_date'].'   สถานะออเดอร์ : ยังไม่โอน   ราคา : '.$ob['total_price'];
-					}
-					else if ($ob.['o_status'] == 1)
-					{
-						$text += 'รหัสออเดอร์ : '.$ob['o_id'].'   วันที่ : '.$ob['o_date'].'   สถานะออเดอร์ : โอนแล้ว   ราคา : '.$ob['total_price'];
-					}
-					else if ($ob.['o_status'] == 2)
-					{
-						$text += 'รหัสออเดอร์ : '.$ob['o_id'].'   วันที่ : '.$ob['o_date'].'   สถานะออเดอร์ : กำลังจัดส่ง   ราคา : '.$ob['total_price'];
-					}
-					pushMessage($userID,textBuild($text),$access_token);
+					// if($ob.['o_status'] == 0)
+					// {
+					// 	$text += 'รหัสออเดอร์ : '.$ob['o_id'].'   วันที่ : '.$ob['o_date'].'   สถานะออเดอร์ : ยังไม่โอน   ราคา : '.$ob['total_price'];
+					// }
+					// else if ($ob.['o_status'] == 1)
+					// {
+					// 	$text += 'รหัสออเดอร์ : '.$ob['o_id'].'   วันที่ : '.$ob['o_date'].'   สถานะออเดอร์ : โอนแล้ว   ราคา : '.$ob['total_price'];
+					// }
+					// else if ($ob.['o_status'] == 2)
+					// {
+					// 	$text += 'รหัสออเดอร์ : '.$ob['o_id'].'   วันที่ : '.$ob['o_date'].'   สถานะออเดอร์ : กำลังจัดส่ง   ราคา : '.$ob['total_price'];
+					// }
+					
+					pushMessage($userID,textBuild($ob['o_status']),$access_token);
 				}
 
 			}
