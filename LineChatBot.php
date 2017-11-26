@@ -167,7 +167,7 @@ if (!is_null($events['events']))
         pushMessage($userID,textBuild('เบอรโทรศัพท์ 0817349462 และ 0818178962'),$access_token);
 			}
 			else if ($getText=='ตรวจสอบสถานะออเดอร์') {
-				pushMessage($userID,imageBuild('https://preproject2mvc20171126124543.azurewebsites.net/BG/122333444455555.jpg','https://preproject2mvc20171126124543.azurewebsites.net/BG/122333444455555.jpg'),$access_token);
+				pushMessage($userID,textBuild('บริการนี้ยังไม่เปิดใช้บริการ'),$access_token);
 			}
 			else if ($getText=='ดูข้อมูลส่วนตัว')
 			{
