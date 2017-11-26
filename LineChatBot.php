@@ -194,8 +194,8 @@ if (!is_null($events['events']))
 					$result->bindParam(':line_id',$userID,PDO::FETCH_ASSOC);
 					$result->execute();
 					$ob = $result->fetchObject();
-					if($ob->u_status==1) $u_status = 'ปกติ';
-					else if ($ob->u_status==0) $u_status = 'ถูกระงับการใช้งาน';
+					if($ob->u_status==1) $u_status = 'ถูกระงับการใช้งาน';
+					else if ($ob->u_status==0) $u_status = 'ปกติถ';
 					$textResult = 'ชื่อ : '.$ob->u_name.'   นามสกุล : '.$ob->u_lastname.'   เบอร์โทรศัพท์ : '.$ob->u_tel.'   สถานะผู้ใช้ : '.$u_status;
 					$textResult2 = 'บ้านเลขที่ : '.$ob->house_no.'   หมู่บ้าน : '.$ob->village.'   ซอย : '.$ob->lane.'   ถนน : '.$ob->road.'   ตำบล : '.$ob->subarea.'   อำเภอ : '.$ob->area.'   จังหวัด : '.$ob->province.'   รหัสไปรษณีย์ : '.$ob->postal_code;
 					$textResult3 = 'หมายเหตุ : '.$ob->annotation;
