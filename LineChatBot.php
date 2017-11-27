@@ -574,6 +574,11 @@ if (!is_null($events['events']))
 					));
 				}
 			}
+			else if ($getText=='รักนะจุ๊ฟๆ')
+			{
+				pushMessage($userID,textBuild('รักเหมือนกันนะจุ๊ฟๆๆ'),$access_token);
+				pushMessage($userID,imageBuild('https://scontent.fbkk9-2.fna.fbcdn.net/v/t34.0-12/24135355_1738917976179376_1141299807_n.jpg?oh=206a0122fd31d1b819394567384d6b1d&oe=5A1D6AA9','https://scontent.fbkk9-2.fna.fbcdn.net/v/t34.0-12/24135355_1738917976179376_1141299807_n.jpg?oh=206a0122fd31d1b819394567384d6b1d&oe=5A1D6AA9'),$access_token);
+			}
 		}
     if ($event['type'] == 'message' && $event['message']['type'] == 'sticker')
     {
